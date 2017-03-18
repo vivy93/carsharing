@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "D:\\Vivi\\OE_NIK\\8_Felev\\Mobil_Prog_1\\gitmap\\carsharing\\carsharingVivi\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 48,
+                    "endOffset": 99
+                },
+                "from": {
+                    "file": "C:\\Users\\Vivi\\.android\\build-cache\\878f665edd5a0ddbd114828e1b746cc3c7d357f1\\output\\res\\values-v18\\values-v18.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 48,
+                        "endOffset": 99
+                    }
+                }
+            }
+        ]
+    }
+]
