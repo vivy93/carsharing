@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "363216409367",
+    "firebase_url": "https://carsharingvivi.firebaseio.com",
+    "project_id": "carsharingvivi",
+    "storage_bucket": "carsharingvivi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363216409367:android:59a0fa44aca74a39",
+        "android_client_info": {
+          "package_name": "com.example.vivi.carsharing_vivi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363216409367-n9jnk6i9f5vn267t50fepsie75cosrep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOOSO24K_WplU6-p_ko9kNGDegB6MtmgQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
