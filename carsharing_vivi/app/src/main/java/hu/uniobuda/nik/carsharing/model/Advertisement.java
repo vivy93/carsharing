@@ -1,4 +1,4 @@
-package com.example.vivi.carsharing_vivi.model;
+package hu.uniobuda.nik.carsharing.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -16,19 +16,19 @@ public class Advertisement {
     private List<String> acceptedUids;      // who pressed accepted
     private String chosenUid;               // mutual
 
-    private Mode mode;
+    private Boolean mode;   // 0: by car, 1: on foot
     private Date when;
-    private String from;                    // GPS coordinate
+    private String from;    // GPS coordinate
     private String to;
     private List<String> nodes;
-    private Integer seats;                  // ez a típus menthető közvetlenül a Firebase DB-be
+    private Integer seats;     // ez a típus menthető közvetlenül a Firebase DB-be
 
 
     public Advertisement() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(String uid, List<String> acceptedUids, String chosenUid, Mode mode, Date when, String from, String to, List<String> nodes, Integer seats) {
+    public Advertisement(String uid, List<String> acceptedUids, String chosenUid, Boolean mode, Date when, String from, String to, List<String> nodes, Integer seats) {
         this.uid = uid;
         this.acceptedUids = acceptedUids;
         this.chosenUid = chosenUid;
@@ -64,11 +64,11 @@ public class Advertisement {
         this.chosenUid = chosenUid;
     }
 
-    public Mode getMode() {
+    public Boolean getMode() {
         return mode;
     }
 
-    public void setMode(Mode mode) {
+    public void setMode(Boolean mode) {
         this.mode = mode;
     }
 

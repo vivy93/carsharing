@@ -1,8 +1,5 @@
-package com.example.vivi.carsharing_vivi;
+package hu.uniobuda.nik.carsharing;
 
-/**
- * Created by Vivi on 2017. 03. 22..
- */
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -91,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                     startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                 }
+
             }
         });
     }

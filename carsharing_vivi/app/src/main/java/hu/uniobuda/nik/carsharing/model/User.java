@@ -1,8 +1,12 @@
-package com.example.vivi.carsharing_vivi.model;
+package hu.uniobuda.nik.carsharing.model;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by pat on 2017.03.27..
@@ -11,30 +15,35 @@ import java.util.Date;
 @IgnoreExtraProperties
 public class User {
 
-    // regisztrációnál ezt a user objektumot kéne létrehozni és elmenteni a Firebase DB-be
-
     private String name;
     private String email;
-    private String password;            // hash
+    private String password;        // hash
     private Date birthDate;
-    private Boolean sex;                // 0: female, 1: male
+    private Boolean sex;            // 0: female, 1: male
     private String telephone;
     private Integer rating;
-    // private ?image profileImage;     // hogy kell tárolni?
+    // private String profileImageUrl;
 
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String name, String email, String password, Date birthDate, Boolean sex, String telephone, Integer rating) {
+    public User(String name, String email, String password, Date birthDate, Boolean sex, String telephone) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
         this.sex = sex;
         this.telephone = telephone;
-        this.rating = rating;
+        this.rating = 3;
+    }
+
+    // for testing
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public String getName() {
@@ -92,4 +101,8 @@ public class User {
     public void setRate(Integer rating) {
         this.rating = rating;
     }
+
+
+
+
 }
