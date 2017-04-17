@@ -56,6 +56,13 @@
             android:textAlignment="center"
             />
 
+        <Button
+            android:layout_margin="15dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/backdoor"
+            android:text="BackDoor" />
+
     </LinearLayout>
 
 </RelativeLayout>
