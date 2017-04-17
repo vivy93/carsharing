@@ -9,21 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class AddDetailsFragment extends Fragment {
+import hu.uniobuda.nik.carsharing.model.Advertisement;
+
+public class AdDetailsFragment extends Fragment {
+
     View rootView;
 
-    public static AddDetailsFragment newInstance(Add selectedAdd) {
+    public static AdDetailsFragment newInstance(Advertisement selectedAd) {
 
         Bundle args = new Bundle();
-        args.putParcelable("selected_add", selectedAdd);
-
-
+        args.putParcelable("selected_ad", selectedAd);
         return newInstance(args);
     }
 
-    public static AddDetailsFragment newInstance(Bundle args) {
+    public static AdDetailsFragment newInstance(Bundle args) {
 
-        AddDetailsFragment fragment = new AddDetailsFragment();
+        AdDetailsFragment fragment = new AdDetailsFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -31,7 +32,7 @@ public class AddDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_add_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_ad_details, container, false);
         return rootView;
     }
 
@@ -39,8 +40,8 @@ public class AddDetailsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ///TODO
-        TextView nicNameView = (TextView) rootView.findViewById(R.id.nickName);
-        TextView rateView = (TextView) rootView.findViewById(R.id.rate);
+        TextView nicNameView = (TextView) rootView.findViewById(R.id.name);
+        TextView rateView = (TextView) rootView.findViewById(R.id.rating);
         //TextView fromView= (TextView) rootView.findViewById(R.id.from);
         //TextView toView = (TextView) rootView.findViewById(R.id.to);
         //TextView whenView = (TextView) rootView.findViewById(R.id.when);
@@ -50,10 +51,12 @@ public class AddDetailsFragment extends Fragment {
         if (getArguments()!=null)
         {
             Bundle args = getArguments();
-            if (args.containsKey("selected_add"))
+            if (args.containsKey("selected_ad"))
             {
-                Add selectedAdd = args.getParcelable("selected_add");
+                Advertisement selectedAdd = args.getParcelable("selected_ad");
+
                 if (selectedAdd!= null) {
+
                     nicNameView.setText("Józsi99");
                     rateView.setText("5/4.5");
                     //fromView.setText(selectedAdd.getFrom());
