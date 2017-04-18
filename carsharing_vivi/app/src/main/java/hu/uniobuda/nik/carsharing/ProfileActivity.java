@@ -1,8 +1,5 @@
-package com.example.vivi.carsharing_vivi;
+package hu.uniobuda.nik.carsharing;
 
-/**
- * Created by Vivi on 2017. 03. 22..
- */
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

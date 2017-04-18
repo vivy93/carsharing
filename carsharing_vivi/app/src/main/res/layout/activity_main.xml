@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vivi.carsharing_vivi.MainActivity">
+    tools:context="hu.uniobuda.nik.carsharing.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +55,13 @@
             android:text="Already Registered? Sign in here."
             android:textAlignment="center"
             />
+
+        <Button
+            android:layout_margin="15dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/backdoor"
+            android:text="BackDoor" />
 
     </LinearLayout>
 
