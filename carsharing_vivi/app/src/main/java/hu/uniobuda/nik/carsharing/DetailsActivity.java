@@ -12,7 +12,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        AdDetailsFragment fragment = AdDetailsFragment.newInstance(getIntent().getExtras());
+        AddDetailsFragment fragment = AddDetailsFragment.newInstance(getIntent().getExtras());
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
