@@ -19,7 +19,7 @@ public class BackDoor extends AppCompatActivity implements View.OnClickListener{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.backdoor);
-
+        String proba;
         buttonAddList =(Button) findViewById(R.id.RAL);
         buttonAddList.setOnClickListener(this);
     }
