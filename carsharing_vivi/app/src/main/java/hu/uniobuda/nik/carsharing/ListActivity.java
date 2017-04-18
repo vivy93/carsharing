@@ -12,7 +12,7 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        AddsListFragment fragment = AddsListFragment.newInstance();
+        AdsListFragment fragment = AdsListFragment.newInstance();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
