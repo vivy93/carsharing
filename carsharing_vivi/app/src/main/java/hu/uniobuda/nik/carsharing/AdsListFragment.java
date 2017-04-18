@@ -52,7 +52,7 @@ public class AdsListFragment extends Fragment {
 
         List<Advertisement> adList = new ArrayList<>();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         String dateInString = "30-04-2017 10:20:00";
         Date date;
 
@@ -63,7 +63,7 @@ public class AdsListFragment extends Fragment {
             for(int i =0; i<50; i++) {
                 Log.d(TAG, "add element to advertisement list");
 
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Bekescsaba", "Budapest", 4 ));
+                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Békéscsaba", "Budapest", random.nextInt(9) ));
                 //adList.add(new Advertisement());
             }
             final AdAdapter adapter = new AdAdapter(adList);

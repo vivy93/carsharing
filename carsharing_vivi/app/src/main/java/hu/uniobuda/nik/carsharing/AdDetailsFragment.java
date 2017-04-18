@@ -44,13 +44,13 @@ public class AdDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //TextView nicNameView = (TextView) rootView.findViewById(R.id.nickName);
+        TextView nicNameView = (TextView) rootView.findViewById(R.id.nickName);
         //TextView rateView = (TextView) rootView.findViewById(R.id.rate);
         TextView fromView= (TextView) rootView.findViewById(R.id.from);
         TextView toView = (TextView) rootView.findViewById(R.id.to);
-        //TextView whenView = (TextView) rootView.findViewById(R.id.when);
+        TextView whenView = (TextView) rootView.findViewById(R.id.when);
         TextView freeSeatsView = (TextView) rootView.findViewById(R.id.freeSeats);
-
+//@Patrícia : azt mondtad majd még bővíted meg formázgatod az xls-t is
 
         if (getArguments()!=null)
         {
@@ -59,17 +59,13 @@ public class AdDetailsFragment extends Fragment {
             {
                 Advertisement selectedAd = args.getParcelable("selected_ad");
                 if (selectedAd!= null) {
-                    //nicNameView.setText("bla bla");
-                    //rateView.setText("5/4.5");
-                    String temp ="From: "+selectedAd.getFrom().toString();
-                    fromView.setText(temp);
-                    temp ="To: "+selectedAd.getTo().toString();
-                    toView.setText(temp);
-                    //temp = selectedAd.getWhen().toString();
-                    //whenView.setText(temp);
-                    // temp="Free seats:"+ selectedAd.getSeats().toString();
-                    Log.d(TAG, temp);
-                    freeSeatsView.setText("55");
+                    nicNameView.append(String.valueOf(selectedAd.getUid()));
+                    //rateView.append(String.valueOf(selectedAd.get));
+                    fromView.append(String.valueOf(selectedAd.getFrom()));
+                    toView.append(String.valueOf(selectedAd.getTo()));
+                    whenView.append(String.valueOf(selectedAd.getWhen()));
+                    //Log.d(TAG, String.valueOf(selectedAd.getSeats()));
+                    freeSeatsView.append(String.valueOf(selectedAd.getSeats()));
                 }
             }
         }
