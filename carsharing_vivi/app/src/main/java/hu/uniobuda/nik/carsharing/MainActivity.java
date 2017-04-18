@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabase;
+    /*temp button*/
+    public Button buttonBackDoor;
+
+
 
     private static final String TAG = "MainActivity";
 
@@ -56,9 +60,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewSignUp = (TextView) findViewById(R.id.textViewSignIn);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        buttonBackDoor  =(Button) findViewById(R.id.backdoor);
 
         buttonRegistered.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
+        buttonBackDoor.setOnClickListener(this);
     }
 
 
@@ -71,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v==textViewSignUp)
         {
             startActivity(new Intent(this, LoginActivity.class));
+        }
+        if(v == buttonBackDoor)
+        {
+            Intent intent = new Intent(MainActivity.this,BackDoor.class);
+            startActivity(intent);
         }
     }
 
