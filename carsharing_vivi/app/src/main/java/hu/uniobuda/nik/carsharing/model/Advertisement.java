@@ -18,7 +18,7 @@ public class Advertisement implements Parcelable {
     private String uid;                     // owner user id
     private List<String> acceptedUids;      // who pressed accepted
     private String chosenUid;               // mutual
-    private TravelMode mode;   // enum
+    private TravelMode mode;   // enum: utazás típusa
     private long when;
     private String from;    // GPS coordinate
     private String to;

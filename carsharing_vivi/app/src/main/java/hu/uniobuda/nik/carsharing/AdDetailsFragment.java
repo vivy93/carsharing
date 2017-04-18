@@ -11,11 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 
 public class AdDetailsFragment extends Fragment {
     View rootView;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");//igy nincs benne a GTM... az idő kiírásban
     private static final String TAG = "AdDetailsFragment";
 
     public static AdDetailsFragment newInstance(Advertisement selectedAd) {
@@ -63,7 +67,8 @@ public class AdDetailsFragment extends Fragment {
                     //rateView.append(String.valueOf(selectedAd.get));
                     fromView.append(String.valueOf(selectedAd.getFrom()));
                     toView.append(String.valueOf(selectedAd.getTo()));
-                    whenView.append(String.valueOf(selectedAd.getWhen()));
+                    whenView.append(String.valueOf(sdf.format(selectedAd.getWhen())));
+
                     //Log.d(TAG, String.valueOf(selectedAd.getSeats()));
                     freeSeatsView.append(String.valueOf(selectedAd.getSeats()));
                 }
