@@ -13,28 +13,27 @@ import java.util.List;
  */
 
 @IgnoreExtraProperties
-public class Advertisement implements Parcelable{
+public class Advertisement implements Parcelable {
 
     private String uid;                     // owner user id
     private List<String> acceptedUids;      // who pressed accepted
     private String chosenUid;               // mutual
-
-    private TravelMode mode;   // 0: by car, 1: on foot
-    private Date when;
-    private String from;    // GPS coordinate
+    private TravelMode mode;                // enum: utazás típusa
+    private long when;
+    private String from;                    // GPS coordinate
     private String to;
     private List<String> nodes;
-    private Integer seats;     // ez a típus menthető közvetlenül a Firebase DB-be
+    private Integer seats;                  // ez a típus menthető közvetlenül a Firebase DB-be
 
 
     public Advertisement() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(String uid, TravelMode mode, Date when, String from, String to, /*List<String> nodes,*/ Integer seats) {
+    public Advertisement(String uid, TravelMode mode, Date when, String from, String to, Integer seats) {
         this.uid = uid;
         this.mode = mode;
-        this.when = when;
+        this.when = when.getTime();
         this.from = from;
         this.to = to;
         this.seats=seats;
@@ -44,7 +43,7 @@ public class Advertisement implements Parcelable{
         this.acceptedUids = acceptedUids;
         this.chosenUid = chosenUid;
         this.mode = mode;
-        this.when = when;
+        this.when = when.getTime();
         this.from = from;
         this.to = to;
         this.nodes = nodes;
@@ -55,9 +54,12 @@ public class Advertisement implements Parcelable{
         uid = in.readString();
         acceptedUids = in.createStringArrayList();
         chosenUid = in.readString();
+        mode = TravelMode.valueOf(in.readString());//TODO
+        when = in.readLong();//TODO
         from = in.readString();
         to = in.readString();
         nodes = in.createStringArrayList();
+        seats = in.readInt();
     }
 
     @Override
@@ -65,9 +67,12 @@ public class Advertisement implements Parcelable{
         dest.writeString(uid);
         dest.writeStringList(acceptedUids);
         dest.writeString(chosenUid);
+        dest.writeString(mode.name());//TODO
+        dest.writeLong(when);//TODO
         dest.writeString(from);
         dest.writeString(to);
         dest.writeStringList(nodes);
+        dest.writeInt(seats);
     }
 
     @Override
@@ -120,11 +125,11 @@ public class Advertisement implements Parcelable{
     }
 
     public Date getWhen() {
-        return when;
+        return new Date(when);
     }
 
     public void setWhen(Date when) {
-        this.when = when;
+        this.when = when.getTime();
     }
 
     public String getFrom() {

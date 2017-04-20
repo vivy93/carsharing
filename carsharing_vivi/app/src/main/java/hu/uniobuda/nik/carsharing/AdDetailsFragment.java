@@ -1,21 +1,21 @@
 package hu.uniobuda.nik.carsharing;
 
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 
 public class AdDetailsFragment extends Fragment {
     View rootView;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");//igy nincs benne a GTM... az idő kiírásban
     private static final String TAG = "AdDetailsFragment";
 
     public static AdDetailsFragment newInstance(Advertisement selectedAd) {
@@ -44,13 +44,13 @@ public class AdDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //TextView nicNameView = (TextView) rootView.findViewById(R.id.nickName);
-        //TextView rateView = (TextView) rootView.findViewById(R.id.rate);
+        TextView nicNameView = (TextView) rootView.findViewById(R.id.name);
+        TextView rateView = (TextView) rootView.findViewById(R.id.rate);
         TextView fromView= (TextView) rootView.findViewById(R.id.from);
         TextView toView = (TextView) rootView.findViewById(R.id.to);
-        //TextView whenView = (TextView) rootView.findViewById(R.id.when);
+        TextView whenView = (TextView) rootView.findViewById(R.id.when);
         TextView freeSeatsView = (TextView) rootView.findViewById(R.id.freeSeats);
-
+//@Patrícia : azt mondtad majd még bővíted meg formázgatod az xls-t is
 
         if (getArguments()!=null)
         {
@@ -59,17 +59,16 @@ public class AdDetailsFragment extends Fragment {
             {
                 Advertisement selectedAd = args.getParcelable("selected_ad");
                 if (selectedAd!= null) {
-                    //nicNameView.setText("bla bla");
-                    //rateView.setText("5/4.5");
-                    String temp ="From: "+selectedAd.getFrom().toString();
-                    fromView.setText(temp);
-                    temp ="To: "+selectedAd.getTo().toString();
-                    toView.setText(temp);
-                    //temp = selectedAd.getWhen().toString();
-                    //whenView.setText(temp);
-                    // temp="Free seats:"+ selectedAd.getSeats().toString();
-                    Log.d(TAG, temp);
-                    freeSeatsView.setText("55");
+                    nicNameView.append("Test Name");
+                    // nicNameView.append(String.valueOf(selectedAd.getUid()));  user id-jával kéne gettelni a DB-ből
+                    rateView.append("4");
+                    //rateView.append(String.valueOf(selectedAd.get)); user id-jával kéne gettelni a DB-ből, ez nem a hirdetéshez kapcsolódik
+                    fromView.append(String.valueOf(selectedAd.getFrom()));
+                    toView.append(String.valueOf(selectedAd.getTo()));
+                    whenView.append(String.valueOf(sdf.format(selectedAd.getWhen())));
+
+                    //Log.d(TAG, String.valueOf(selectedAd.getSeats()));
+                    freeSeatsView.append(String.valueOf(selectedAd.getSeats()));
                 }
             }
         }

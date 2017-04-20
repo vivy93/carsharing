@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
@@ -13,6 +14,7 @@ import hu.uniobuda.nik.carsharing.model.Advertisement;
 public class AdAdapter extends BaseAdapter {
 
     private List<Advertisement> adsList;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     public AdAdapter(List<Advertisement> AdsList){this.adsList=AdsList;}
 
     @Override
@@ -33,7 +35,7 @@ public class AdAdapter extends BaseAdapter {
         }
         Advertisement ad = getItem(i);
 
-        adView.setText(ad.getFrom()+" -> "+ad.getTo()+": "+ad.getWhen());
+        adView.setText(ad.getFrom()+"\n-> "+ad.getTo()+"\n"+sdf.format(ad.getWhen()));
 
         return adView;
     }
