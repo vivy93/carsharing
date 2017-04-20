@@ -18,19 +18,19 @@ public class Advertisement implements Parcelable {
     private String uid;                     // owner user id
     private List<String> acceptedUids;      // who pressed accepted
     private String chosenUid;               // mutual
-    private TravelMode mode;   // enum: utazás típusa
+    private TravelMode mode;                // enum: utazás típusa
     private long when;
-    private String from;    // GPS coordinate
+    private String from;                    // GPS coordinate
     private String to;
     private List<String> nodes;
-    private Integer seats;     // ez a típus menthető közvetlenül a Firebase DB-be
+    private Integer seats;                  // ez a típus menthető közvetlenül a Firebase DB-be
 
 
     public Advertisement() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(String uid, TravelMode mode, Date when, String from, String to, /*List<String> nodes,*/ Integer seats) {
+    public Advertisement(String uid, TravelMode mode, Date when, String from, String to, Integer seats) {
         this.uid = uid;
         this.mode = mode;
         this.when = when.getTime();

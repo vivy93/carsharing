@@ -63,16 +63,15 @@ public class AdsListFragment extends Fragment {
             for(int i =0; i<10; i++) {
                 Log.d(TAG, "add element to advertisement list");
                 adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Debrecen", "Budapest", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Csontváry Kosztka Tivadar utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Csontváry Kosztka Tivadar utcautcautcautcautcautcautcautca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
+                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Csontváry utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
+                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Kosztka Tivadar utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
                 // az xml ben szerkeszteni kell h oda vissza egysorban maradjanak az elemek ha ebben az elrendezsben  marad mert igy ha túl hozzú a szöveg egymásra csúszhatnak
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Csontváry Kosztka Tivadar utca", "JászfelsőszentgyörgyJászfelsőszentgyörgyJászfelsőszentgyörgy", random.nextInt(9) ));
+                adList.add(new Advertisement("1", TravelMode.BY_CAR, date, "Budaörs, Szabadság út", "Bakony", random.nextInt(9) ));
                 //adList.add(new Advertisement());
             }
             final AdAdapter adapter = new AdAdapter(adList);
             ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
             listView.setAdapter(adapter);
-
 
 
             // klikk egy listaelemre: új DetailsActivity()

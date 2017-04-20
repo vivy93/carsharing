@@ -1,19 +1,15 @@
 package hu.uniobuda.nik.carsharing;
 
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 
@@ -48,8 +44,8 @@ public class AdDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView nicNameView = (TextView) rootView.findViewById(R.id.nickName);
-        //TextView rateView = (TextView) rootView.findViewById(R.id.rate);
+        TextView nicNameView = (TextView) rootView.findViewById(R.id.name);
+        TextView rateView = (TextView) rootView.findViewById(R.id.rate);
         TextView fromView= (TextView) rootView.findViewById(R.id.from);
         TextView toView = (TextView) rootView.findViewById(R.id.to);
         TextView whenView = (TextView) rootView.findViewById(R.id.when);
@@ -63,8 +59,10 @@ public class AdDetailsFragment extends Fragment {
             {
                 Advertisement selectedAd = args.getParcelable("selected_ad");
                 if (selectedAd!= null) {
-                    nicNameView.append(String.valueOf(selectedAd.getUid()));
-                    //rateView.append(String.valueOf(selectedAd.get));
+                    nicNameView.append("Test Name");
+                    // nicNameView.append(String.valueOf(selectedAd.getUid()));  user id-jával kéne gettelni a DB-ből
+                    rateView.append("4");
+                    //rateView.append(String.valueOf(selectedAd.get)); user id-jával kéne gettelni a DB-ből, ez nem a hirdetéshez kapcsolódik
                     fromView.append(String.valueOf(selectedAd.getFrom()));
                     toView.append(String.valueOf(selectedAd.getTo()));
                     whenView.append(String.valueOf(sdf.format(selectedAd.getWhen())));
