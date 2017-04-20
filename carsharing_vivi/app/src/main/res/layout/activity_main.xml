@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,10 +19,36 @@
             android:id="@+id/userreg"
             android:text="User Registration"
             android:textAlignment="center"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textColor="#000000"
             />
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userName"
+            android:text="Name:"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <EditText
+            android:layout_margin="15dp"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextName"
+            android:hint="Enter your full name"
 
+            />
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userEmail"
+            android:text="Email:"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
         <EditText
             android:layout_margin="15dp"
             android:inputType="textEmailAddress"
@@ -32,6 +58,15 @@
             android:hint="Enter your email"
 
             />
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userPassword"
+            android:text="Password:"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
         <EditText
             android:layout_margin="15dp"
             android:inputType="textPassword"
@@ -40,6 +75,70 @@
             android:id="@+id/editTextPassword"
             android:hint="Enter your password"
 
+            />
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userBdate"
+            android:text="Birth date:"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <EditText
+            android:layout_margin="15dp"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextDate"
+            android:hint="1989.12.31"
+
+            />
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userSex"
+            android:text="Male or Female?"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editRadioFemale"
+                android:text="Female"
+                android:textSize="18sp"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editRadioMale"
+                android:text="Male"
+                android:textSize="18sp"
+                />
+        </RadioGroup>
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userTelephone"
+            android:text="Telephone:"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            />
+        <EditText
+            android:layout_margin="15dp"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextTelephone"
+            android:hint="+36301234567"
             />
         <Button
             android:layout_margin="15dp"
@@ -65,4 +164,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

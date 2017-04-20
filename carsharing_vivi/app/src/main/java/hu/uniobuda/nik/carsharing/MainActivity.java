@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import hu.uniobuda.nik.carsharing.model.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -29,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewSignUp;
+    private EditText editTextName;
+    private EditText editTextDate;
+    private EditText editTextTelephone;
+    private RadioButton editRadioMale;
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -36,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /*temp button*/
     public Button buttonBackDoor;
 
-
+//String name, String email, String password, Date birthDate, Boolean sex, String telephone
 
     private static final String TAG = "MainActivity";
 
@@ -60,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewSignUp = (TextView) findViewById(R.id.textViewSignIn);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextName=(EditText) findViewById(R.id.editTextName);
+        editTextDate=    (EditText) findViewById(R.id.editTextDate);
+        editTextTelephone=  (EditText) findViewById(R.id.editTextTelephone);
+        editRadioMale = (RadioButton) findViewById(R.id.editRadioMale);
+
         buttonBackDoor  =(Button) findViewById(R.id.backdoor);
 
         buttonRegistered.setOnClickListener(this);
@@ -88,6 +102,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void RegisterUser() {
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
+        final String Bdate = editTextDate.getText().toString().trim();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+        final Date birthdate;
+        try {
+            birthdate = format.parse(Bdate);
+        } catch (ParseException e) {
+            Toast.makeText(this,"Wrong birth date format!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final String telephone = editTextTelephone.getText().toString().trim();
+        final String name = editTextName.getText().toString().trim();
+        final Boolean sex = editRadioMale.isChecked(); //0 female - 1 male
         if (TextUtils.isEmpty(email))
         {
             Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
@@ -103,51 +130,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
-                if (task.isSuccessful()) {
-                    onAuthSuccess(task.getResult().getUser());
-                } else
-                {
-                    Toast.makeText(MainActivity.this, "Registration Error!", Toast.LENGTH_LONG).show();
-                }
-                progressDialog.dismiss();
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
+                        if (task.isSuccessful()) {
+                            onAuthSuccess(task.getResult().getUser(),birthdate, telephone, name, password, sex);
+                        } else
+                        {
+                            Toast.makeText(MainActivity.this, "Registration Error!", Toast.LENGTH_LONG).show();
+                        }
+                        progressDialog.dismiss();
 
-            }
-        });
+                    }
+                });
     }
 
-    private void onAuthSuccess(FirebaseUser user) {
+    private void onAuthSuccess(FirebaseUser user, Date birthDate, String telephone, String name, String password, Boolean sex) {
 
         // mock name for testing
-        String mockName = "Herbie Hancock";
+        //String mockName = "Herbie Hancock";
 
         // mock save
-        writeNewUser(user.getUid(), mockName, user.getEmail());
+        //writeNewUser(user.getUid(),mockName, user.getEmail());
 
         // real save
-        // writeNewUser(user.getUid(), mockName, user.getEmail(), password, birthDate, sex, telephone);
+        writeNewUser(user.getUid(), name, user.getEmail(), password, birthDate, sex, telephone);
 
         startActivity(new Intent(new Intent(getApplicationContext(),ProfileActivity.class)));
         finish();
     }
 
     // mock save
-    private void writeNewUser(String userId, String name, String email) {
+    /*private void writeNewUser(String userId, String name, String email) {
 
         User user = new User(name, email);
         firebaseDatabase.child("users").child(userId).setValue(user);
-    }
+    }*/
 
 
-    /* real save
+    //real save
     private void writeNewUser(String userId, String name, String email, String password, Date birthDate, Boolean sex, String telephone) {
 
         User user = new User(name, email, password, birthDate, sex, telephone);
         firebaseDatabase.child("users").child(userId).setValue(user);
     }
-    */
+
 
 
 }
