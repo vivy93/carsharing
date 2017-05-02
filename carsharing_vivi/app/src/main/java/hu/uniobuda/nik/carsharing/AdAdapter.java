@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 
@@ -14,7 +15,9 @@ import hu.uniobuda.nik.carsharing.model.Advertisement;
 public class AdAdapter extends BaseAdapter {
 
     private List<Advertisement> adsList;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
     public AdAdapter(List<Advertisement> AdsList){this.adsList=AdsList;}
 
     @Override

@@ -22,7 +22,10 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".BackDoor" />
         <activity android:name=".DetailsActivity" />
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity" />
+        <activity android:name=".PostCarActivity" />
+        <activity android:name=".PostFootActivity" />
+        <activity android:name=".PostChooseActivity"></activity>
     </application>
 
 </manifest>

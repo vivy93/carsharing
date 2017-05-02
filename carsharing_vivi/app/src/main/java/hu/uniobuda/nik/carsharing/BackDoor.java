@@ -13,22 +13,22 @@ import android.widget.Button;
 
 public class BackDoor extends AppCompatActivity implements View.OnClickListener{
 
-    Button buttonAddList;
+    Button buttonAdList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.backdoor);
 
-        buttonAddList =(Button) findViewById(R.id.RAL);
-        buttonAddList.setOnClickListener(this);
+        buttonAdList =(Button) findViewById(R.id.RAL);
+        buttonAdList.setOnClickListener(this);
     }
 
 
 
     @Override
     public void onClick(View v) {
-    if (v==buttonAddList)
+    if (v== buttonAdList)
         startActivity(new Intent(this,ListActivity.class));
 
     }

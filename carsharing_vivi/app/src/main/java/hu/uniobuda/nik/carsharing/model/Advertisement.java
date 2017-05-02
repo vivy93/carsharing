@@ -15,63 +15,59 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Advertisement implements Parcelable {
 
-    private String uid;                     // owner user id
+    // private String uid;                     // owner user id
     private List<String> acceptedUids;      // who pressed accepted
     private String chosenUid;               // mutual
-    private TravelMode mode;                // enum: utazás típusa
+
+    private TravelMode mode;
     private long when;
-    private String from;                    // GPS coordinate
+    private String from;
     private String to;
-    private List<String> nodes;
-    private Integer seats;                  // ez a típus menthető közvetlenül a Firebase DB-be
+    private String node1;
+    private String node2;
+    private Integer seats;
 
 
     public Advertisement() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(String uid, TravelMode mode, Date when, String from, String to, Integer seats) {
-        this.uid = uid;
+    public Advertisement(TravelMode mode, Date when, String from, String to, String node1, String node2, Integer seats) {
+        // this.uid = uid;
         this.mode = mode;
         this.when = when.getTime();
         this.from = from;
         this.to = to;
+        this.node1 = node1;
+        this.node2 = node2;
         this.seats=seats;
     }
-    public Advertisement(String uid, List<String> acceptedUids, String chosenUid, TravelMode mode, Date when, String from, String to, List<String> nodes, Integer seats) {
-        this.uid = uid;
-        this.acceptedUids = acceptedUids;
-        this.chosenUid = chosenUid;
-        this.mode = mode;
-        this.when = when.getTime();
-        this.from = from;
-        this.to = to;
-        this.nodes = nodes;
-        this.seats = seats;
-    }
+
 
     protected Advertisement(Parcel in) {
-        uid = in.readString();
+        // uid = in.readString();
         acceptedUids = in.createStringArrayList();
         chosenUid = in.readString();
         mode = TravelMode.valueOf(in.readString());//TODO
         when = in.readLong();//TODO
         from = in.readString();
         to = in.readString();
-        nodes = in.createStringArrayList();
+        node1 = in.readString();
+        node2 = in.readString();
         seats = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(uid);
+        // dest.writeString(uid);
         dest.writeStringList(acceptedUids);
         dest.writeString(chosenUid);
         dest.writeString(mode.name());//TODO
         dest.writeLong(when);//TODO
         dest.writeString(from);
         dest.writeString(to);
-        dest.writeStringList(nodes);
+        dest.writeString(node1);
+        dest.writeString(node2);
         dest.writeInt(seats);
     }
 
@@ -92,6 +88,7 @@ public class Advertisement implements Parcelable {
         }
     };
 
+    /*
     public String getUid() {
         return uid;
     }
@@ -99,6 +96,7 @@ public class Advertisement implements Parcelable {
     public void setUid(String uid) {
         this.uid = uid;
     }
+    */
 
     public List<String> getAcceptedUids() {
         return acceptedUids;
@@ -148,12 +146,20 @@ public class Advertisement implements Parcelable {
         this.to = to;
     }
 
-    public List<String> getNodes() {
-        return nodes;
+    public String getNode1() {
+        return node1;
     }
 
-    public void setNodes(List<String> nodes) {
-        this.nodes = nodes;
+    public void setNode1(String node1) {
+        this.node1 = node1;
+    }
+
+    public String getNode2() {
+        return node2;
+    }
+
+    public void setNode2(String node2) {
+        this.node2 = node2;
     }
 
     public Integer getSeats() {
