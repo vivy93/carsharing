@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_post"
     android:layout_width="match_parent"
@@ -9,13 +9,138 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hu.uniobuda.nik.carsharing.PostCarActivity">
-
-    <Button
-        android:layout_margin="15dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonPost"
-        android:text="Post"
-        />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/textByCar"
+            android:text="I SHARE MY CAR"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textWhen"
+            android:text="WHEN:"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_below="@+id/textByCar"
+            android:layout_alignParentStart="true"
+            />
+
+        <EditText
+            android:inputType="date"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/showDate"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"
+            android:layout_alignBaseline="@+id/textWhen"
+            android:layout_alignBottom="@+id/textWhen"
+            android:layout_alignParentEnd="true"
+            android:hint="yyyy.MM.dd/hh-mm-ss"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FROM:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:id="@+id/textFrom"
+            android:layout_alignBaseline="@+id/editTextFrom"
+            android:layout_alignBottom="@+id/editTextFrom"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:inputType="text"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextFrom"
+            android:layout_below="@+id/showDate"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TO:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:id="@+id/textTo"
+            android:layout_below="@+id/editTextFrom"
+            android:layout_alignStart="@+id/textFrom"
+            android:layout_marginTop="26dp" />
+        <EditText
+            android:inputType="text"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextTo"
+            android:layout_marginLeft="15dp"
+            android:layout_alignBaseline="@+id/textTo"
+            android:layout_alignBottom="@+id/textTo"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:text="NODES:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:id="@+id/textNodes"
+            android:layout_below="@+id/editTextTo"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/node1"
+            android:textSize="18sp"
+            android:layout_below="@+id/textNodes"
+            android:layout_alignParentStart="true"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/node2"
+            android:textSize="18sp"
+            android:layout_below="@+id/node1"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="FREE SEATS:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:id="@+id/textSeats"
+            android:layout_below="@+id/node2"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:inputType="number"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextFreeSeats"
+            android:layout_marginLeft="15dp"
+            android:layout_alignBaseline="@+id/textSeats"
+            android:layout_alignBottom="@+id/textSeats"
+            android:layout_alignParentEnd="true" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonPost"
+            android:text="Post"
+            android:layout_below="@+id/editTextFreeSeats"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

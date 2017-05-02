@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="accent_material_light">#ffbb33</color>
+    <color name="my_color">#ffbb33</color>
+    <color name="my_color_dark_oringe">#f7941D</color>
 </resources>
