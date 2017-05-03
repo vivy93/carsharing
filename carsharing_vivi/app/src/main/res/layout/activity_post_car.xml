@@ -47,6 +47,7 @@
             android:layout_alignParentEnd="true"
             android:hint="yyyy.MM.dd/hh-mm-ss"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,6 +58,7 @@
             android:layout_alignBaseline="@+id/editTextFrom"
             android:layout_alignBottom="@+id/editTextFrom"
             android:layout_alignParentStart="true" />
+
         <EditText
             android:inputType="text"
             android:layout_width="220dp"
@@ -64,6 +66,21 @@
             android:id="@+id/editTextFrom"
             android:layout_below="@+id/showDate"
             android:layout_alignParentEnd="true" />
+
+
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/showDate"
+            android:layout_toEndOf="@+id/textFrom"
+           />
+
+
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,6 +156,7 @@
             android:layout_below="@+id/editTextFreeSeats"
             android:layout_alignParentStart="true"
             android:layout_marginTop="15dp" />
+
 
     </RelativeLayout>
 
