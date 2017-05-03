@@ -24,12 +24,11 @@
             />
 
         <Button
+            android:id="@+id/buttonLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
-            android:id="@+id/buttonLogout"
             android:layout_gravity="center_horizontal"
-            />
+            android:text="Logout" />
 
         <Button
             android:layout_width="wrap_content"
@@ -40,12 +39,11 @@
             />
 
         <Button
+            android:id="@+id/buttonAds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="List of advertisements"
-            android:id="@+id/buttonAds"
             android:layout_gravity="center_horizontal"
-            />
+            android:text="List of advertisements" />
 
     </LinearLayout>
 </RelativeLayout>

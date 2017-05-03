@@ -10,4 +10,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hu.uniobuda.nik.carsharing.PostFootActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/textOnFoot"
+        android:text="I'D LIKE TO GET IN A CAR"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textWhen"
+        android:text="WHEN:"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_below="@+id/textOnFoot"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:inputType="date"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateOnFoot"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignBaseline="@+id/textWhen"
+        android:layout_alignBottom="@+id/textWhen"
+        android:layout_alignParentEnd="true"
+        android:hint="yyyy.MM.dd/hh-mm-ss"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FROM:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:id="@+id/textFrom"
+        android:layout_alignBaseline="@+id/editTextFrom"
+        android:layout_alignBottom="@+id/editTextFrom"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:inputType="text"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextFrom"
+        android:layout_below="@+id/dateOnFoot"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPost"
+        android:text="Post"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
