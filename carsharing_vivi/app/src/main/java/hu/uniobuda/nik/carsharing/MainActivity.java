@@ -25,12 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import hu.uniobuda.nik.carsharing.model.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonRegistered;
+    private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewSignUp;
@@ -42,10 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabase;
+
     /*temp button*/
     public Button buttonBackDoor;
-
-//String name, String email, String password, Date birthDate, Boolean sex, String telephone
 
     private static final String TAG = "MainActivity";
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         progressDialog = new ProgressDialog(this);
-        buttonRegistered = (Button) findViewById(R.id.buttonRegister);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
         textViewSignUp = (TextView) findViewById(R.id.textViewSignIn);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonBackDoor  =(Button) findViewById(R.id.backdoor);
 
-        buttonRegistered.setOnClickListener(this);
+        buttonRegister.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
         buttonBackDoor.setOnClickListener(this);
     }
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v==buttonRegistered)
+        if (v== buttonRegister)
         {
             RegisterUser();
         }
@@ -102,11 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void RegisterUser() {
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
+
         final String Bdate = editTextDate.getText().toString().trim();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-        final Date birthdate;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
+        final Date birthDate;
         try {
-            birthdate = format.parse(Bdate);
+            birthDate = format.parse(Bdate);
         } catch (ParseException e) {
             Toast.makeText(this,"Wrong birth date format!",Toast.LENGTH_SHORT).show();
             return;
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
                         if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser(),birthdate, telephone, name, password, sex);
+                            onAuthSuccess(task.getResult().getUser(), birthDate, telephone, name, password, sex);
                         } else
                         {
                             Toast.makeText(MainActivity.this, "Registration Error!", Toast.LENGTH_LONG).show();
@@ -163,8 +164,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // mock save
     /*private void writeNewUser(String userId, String name, String email) {
 
-        User user = new User(name, email);
-        firebaseDatabase.child("users").child(userId).setValue(user);
+     User user = new User(name, email);
+     firebaseDatabase.child("users").child(userId).setValue(user);
+
     }*/
 
 

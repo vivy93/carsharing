@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 
 public class AdDetailsFragment extends Fragment {
     View rootView;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");//igy nincs benne a GTM... az idő kiírásban
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()); //igy nincs benne a GTM... az idő kiírásban
     private static final String TAG = "AdDetailsFragment";
 
     public static AdDetailsFragment newInstance(Advertisement selectedAd) {

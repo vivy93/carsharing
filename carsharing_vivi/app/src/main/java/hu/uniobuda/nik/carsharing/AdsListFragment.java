@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
@@ -43,16 +44,13 @@ public class AdsListFragment extends Fragment {
         return rootView;
     }
 
-
-
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         List<Advertisement> adList = new ArrayList<>();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String dateInString = "30-04-2017 10:20:00";
         Date date;
 
@@ -60,19 +58,18 @@ public class AdsListFragment extends Fragment {
             date = sdf.parse(dateInString);
             Log.d(TAG, "trying to parse date");
             Random random = new Random();
+            /*
             for(int i =0; i<10; i++) {
                 Log.d(TAG, "add element to advertisement list");
                 adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Debrecen", "Budapest", random.nextInt(9) ));
                 adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Csontváry utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
                 adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Kosztka Tivadar utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
-                // az xml ben szerkeszteni kell h oda vissza egysorban maradjanak az elemek ha ebben az elrendezsben  marad mert igy ha túl hozzú a szöveg egymásra csúszhatnak
                 adList.add(new Advertisement("1", TravelMode.BY_CAR, date, "Budaörs, Szabadság út", "Bakony", random.nextInt(9) ));
-                //adList.add(new Advertisement());
             }
+            */
             final AdAdapter adapter = new AdAdapter(adList);
             ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
             listView.setAdapter(adapter);
-
 
             // klikk egy listaelemre: új DetailsActivity()
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,6 +87,7 @@ public class AdsListFragment extends Fragment {
             Log.d(TAG, e.getMessage());
             e.printStackTrace();
         }
+
         //vege
     }
 }

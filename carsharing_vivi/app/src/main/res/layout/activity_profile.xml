@@ -29,14 +29,23 @@
             android:text="Logout"
             android:id="@+id/buttonLogout"
             android:layout_gravity="center_horizontal"
-
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I'd like to travel"
+            android:id="@+id/buttonCreate"
+            android:layout_gravity="center_horizontal"
+            />
 
-
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="List of advertisements"
+            android:id="@+id/buttonAds"
+            android:layout_gravity="center_horizontal"
+            />
 
     </LinearLayout>
-
-
 </RelativeLayout>
