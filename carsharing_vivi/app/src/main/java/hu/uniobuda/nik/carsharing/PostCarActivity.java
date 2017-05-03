@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,21 +34,24 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference firebaseDatabase;
 
     private Button buttonPost;
-    /*
-    private TextView from;
-    private TextView to;
-    private TextView node1;
-    private TextView node2;
-    private TextView when;
-    */
+
+    private EditText editTextFrom;
+    private EditText editTextTo;
+    private EditText node1;
+    private EditText node2;
+    private EditText showDate;
+    private EditText editTextFreeSeats;
+    private Date travelDate;
+    private Integer seats;
+
 
     // MOCK DATA
-    private String from;
+    /*private String from;
     private String to;
     private String node1;
     private String node2;
     private Date when;
-    private Integer seats;
+    private Integer seats;*/
     // END OF MOCK DATA
 
     @Override
@@ -65,10 +69,18 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
             ezek mellett kéne egy "check" button is sztem
          */
 
+        editTextFrom = (EditText) findViewById(R.id.editTextFrom);
+        editTextTo= (EditText) findViewById(R.id.editTextTo);
+        node1 =(EditText) findViewById(R.id.node1);
+        node2 =(EditText) findViewById(R.id.node2);
+        showDate = (EditText) findViewById(R.id.showDate);
+        editTextFreeSeats= (EditText) findViewById(R.id.editTextFreeSeats);
+
         buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(this);
 
-        // MOCK DATA
+
+        /*// MOCK DATA
         from = "Bekescsaba Petofi utca";
         to = "Budapest Deak Ferenc ter";
         node1 = "Gyula";
@@ -84,30 +96,51 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         Log.d(TAG, "creating mock data: success");
-        // END OF MOCK DATA
+        // END OF MOCK DATA*/
 
     }
 
     @Override
     public void onClick(View view) {
+        if(view==buttonPost){
+            postAd();
+            //finish();
 
-        postAd();
+            //Log.d(TAG, "finishing " + TAG + ": success");
 
-        finish();
-        Log.d(TAG, "finishing " + TAG + ": success");
-
-        startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this, ProfileActivity.class));
+        }
     }
 
     public void postAd() {
 
-        // SAVE MOCK DATA
+        /*// SAVE MOCK DATA
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Advertisement ad = new Advertisement(TravelMode.BY_CAR, when, from, to, node1, node2, seats);
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).setValue(ad);
 
         Log.d(TAG, "saving mock data: success");
-        // END OF SAVING MOCK DATA
+        // END OF SAVING MOCK DATA*/
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        String dateInString = showDate.getText().toString().trim();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd/hh-mm-ss", Locale.getDefault());
+        try {
+            travelDate = format.parse(dateInString);
+        } catch (ParseException e) {
+            Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
+        }
+
+        String num= editTextFreeSeats.getText().toString().trim();
+        try {
+            seats=Integer.parseInt(num);
+        } catch (Exception e){
+            Toast.makeText(this,"Wrong number format!",Toast.LENGTH_SHORT).show();
+        }
+
+        Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(), node2.getText().toString().trim(), seats);
+        firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
+
+        Log.d(TAG, "saving real data: success");
     }
 }

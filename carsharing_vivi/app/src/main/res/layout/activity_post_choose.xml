@@ -10,4 +10,48 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hu.uniobuda.nik.carsharing.PostChooseActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="80dp"
+        android:text="I AM..."
+        android:textSize="35dp"
+        android:textColor="#000000"
+        android:id="@+id/textIAm"
+
+        />
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textIAm"
+        android:id="@+id/postChooser"
+        android:orientation="vertical">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/editRadioByCar"
+            android:text="BY CAR"
+            android:textSize="18sp"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editRadioOnFoor"
+            android:text="ON FOOT"
+            android:textSize="18sp"
+            />
+    </RadioGroup>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/postChooser"
+        android:layout_marginTop="80dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/nextButton"
+        android:text="Next"
+        />
 </RelativeLayout>
