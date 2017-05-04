@@ -1,13 +1,8 @@
 package hu.uniobuda.nik.carsharing;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,9 +15,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +28,9 @@ import java.util.Locale;
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 import hu.uniobuda.nik.carsharing.model.TravelMode;
 
+enum FTN {From, To,Node1,Node2};
 public class PostCarActivity extends AppCompatActivity implements View.OnClickListener{
+
 
     private static final String TAG = "PostCarActivity";
     /**
@@ -49,6 +43,8 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference firebaseDatabase;
 
     private Button buttonPost;
+
+    private FTN ftn;
 
     private EditText editTextFrom;
     private EditText editTextTo;
@@ -71,23 +67,45 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 //-----------------------------
         // Open the autocomplete activity when the button is clicked.
-        Button openButton = (Button) findViewById(R.id.buttonFrom);
-        openButton.setOnClickListener(new View.OnClickListener() {
+        editTextFrom = (EditText) findViewById(R.id.editTextFrom);
+        editTextFrom.setKeyListener(null);// ne lehessen módosítani
+        editTextFrom.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                ftn=FTN.From;
                 openAutocompleteActivity();
             }
         });
 
-//---------------------
-        //--------------------------
-        editTextFrom = (EditText) findViewById(R.id.editTextFrom);
-        editTextFrom.setKeyListener(null);// ne lehessen módosítani
-        //----------------
+        editTextTo = (EditText) findViewById(R.id.editTextTo);
+        editTextTo.setKeyListener(null);// ne lehessen módosítani
+        editTextTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ftn=FTN.To;
+                openAutocompleteActivity();
+            }
+        });
 
-        editTextTo= (EditText) findViewById(R.id.editTextTo);
         node1 =(EditText) findViewById(R.id.node1);
+        node1.setKeyListener(null);
+        node1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ftn=FTN.Node1;
+                openAutocompleteActivity();;
+            }
+        });
         node2 =(EditText) findViewById(R.id.node2);
+        node2.setKeyListener(null);
+        node2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ftn=FTN.Node2;
+                openAutocompleteActivity();;
+            }
+        });
+        //----------------
         showDate = (EditText) findViewById(R.id.showDate);
         editTextFreeSeats= (EditText) findViewById(R.id.editTextFreeSeats);
 
@@ -143,7 +161,18 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
                 Place place = PlaceAutocomplete.getPlace(this, data);
 
                 // Format the place's details and display them in the TextView.
-                editTextFrom.setText(place.getAddress());
+                // Which
+                switch (ftn){
+                    case From:editTextFrom.setText(place.getAddress());
+                        break;
+                    case To: editTextTo.setText(place.getAddress());
+                        break;
+                    case Node1: node1.setText(place.getAddress());
+                        break;
+                    case Node2: node2.setText(place.getAddress());
+                        break;
+                }
+
 
                 // Display attributions if required.
                 /*CharSequence attributions = place.getAttributions();

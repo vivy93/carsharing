@@ -48,17 +48,16 @@
             android:hint="yyyy.MM.dd/hh-mm-ss"
             />
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FROM:"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:id="@+id/buttonFrom"
+            android:id="@+id/textFrom"
             android:layout_alignBaseline="@+id/editTextFrom"
             android:layout_alignBottom="@+id/editTextFrom"
             android:layout_alignParentStart="true" />
-
         <EditText
             android:inputType="text"
             android:layout_width="220dp"
@@ -66,6 +65,7 @@
             android:id="@+id/editTextFrom"
             android:layout_below="@+id/showDate"
             android:layout_alignParentEnd="true" />
+
 
 
 
@@ -77,8 +77,9 @@
             android:textSize="18sp"
             android:id="@+id/textTo"
             android:layout_below="@+id/editTextFrom"
-            android:layout_alignStart="@+id/buttonFrom"
-            android:layout_marginTop="26dp" />
+            android:layout_alignStart="@+id/textFrom"
+            android:layout_marginTop="26dp"
+            />
         <EditText
             android:inputType="text"
             android:layout_width="220dp"
@@ -88,6 +89,8 @@
             android:layout_alignBaseline="@+id/textTo"
             android:layout_alignBottom="@+id/textTo"
             android:layout_alignParentEnd="true" />
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
