@@ -9,6 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +31,8 @@ import hu.uniobuda.nik.carsharing.model.TravelMode;
 public class PostFootActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PostCarActivity";
+
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabase;
@@ -43,6 +51,16 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
         editTextFrom = (EditText) findViewById(R.id.editTextFrom);
+        editTextFrom.setKeyListener(null);// ne lehessen módosítani
+        editTextFrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openAutocompleteActivity();
+            }
+        });
+
+
         dateOnFoot= (EditText) findViewById(R.id.dateOnFoot);
 
         buttonPost = (Button) findViewById(R.id.buttonPost);
@@ -61,6 +79,49 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(this, ProfileActivity.class));
         }
     }
+
+    private void openAutocompleteActivity() {
+        try {
+
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    .build(this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+        } catch (GooglePlayServicesRepairableException e) {
+
+            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                    0 /* requestCode */).show();
+        } catch (GooglePlayServicesNotAvailableException e) {
+
+            String message = "Google Play Services is not available: " +
+                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
+
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Called after the autocomplete activity has finished to return its result.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+            if (resultCode == RESULT_OK) {
+
+                Place place = PlaceAutocomplete.getPlace(this, data);
+
+                editTextFrom.setText(place.getAddress());
+
+                }
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.e(TAG, "Error: Status = " + status.toString());
+            } else if (resultCode == RESULT_CANCELED) {
+            }
+    }
+
 
     private void postAd() {
 
