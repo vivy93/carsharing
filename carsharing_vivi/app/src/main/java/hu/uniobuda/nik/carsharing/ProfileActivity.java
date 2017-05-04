@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if (v == buttonAds){
             finish();
-            startActivity(new Intent(this, ListActivity.class));
+            startActivity(new Intent(this,ListActivity.class));
         }
     }
 }

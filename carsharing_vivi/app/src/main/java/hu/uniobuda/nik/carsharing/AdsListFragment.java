@@ -58,15 +58,15 @@ public class AdsListFragment extends Fragment {
             date = sdf.parse(dateInString);
             Log.d(TAG, "trying to parse date");
             Random random = new Random();
-            /*
-            for(int i =0; i<10; i++) {
+
+            for(int i =0; i<10; i++) {// Teszt adatok -> van megjelenítés
                 Log.d(TAG, "add element to advertisement list");
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Debrecen", "Budapest", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Csontváry utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Kosztka Tivadar utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.BY_CAR, date, "Budaörs, Szabadság út", "Bakony", random.nextInt(9) ));
+                adList.add(new Advertisement(/*"1",*/ TravelMode.ON_FOOT, date, "Debrecen", "Budapest", "Debrecen", "Budapest", random.nextInt(9) ));
+                adList.add(new Advertisement(/*"1",*/ TravelMode.ON_FOOT, date, "Budapest, Csontváry utca", "Jászfelsőszentgyörgy", "Debrecen", "Budapest", random.nextInt(9) ));
+                adList.add(new Advertisement(/*"1",*/ TravelMode.ON_FOOT, date, "Budapest, Kosztka Tivadar utca", "Jászfelsőszentgyörgy", "Debrecen", "Budapest", random.nextInt(9) ));
+                adList.add(new Advertisement(/*"1",*/ TravelMode.BY_CAR, date, "Budaörs, Szabadság út", "Bakony",  "Debrecen", "Budapest",random.nextInt(9) ));
             }
-            */
+
             final AdAdapter adapter = new AdAdapter(adList);
             ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
             listView.setAdapter(adapter);
