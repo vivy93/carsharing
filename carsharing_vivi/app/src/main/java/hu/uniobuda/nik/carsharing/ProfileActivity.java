@@ -1,6 +1,8 @@
 package hu.uniobuda.nik.carsharing;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        setContentView(R.layout.activity_profile);
+        AdsListFragment fragment = AdsListFragment.newInstance();// át kellene adni az user ID
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
         textViewUserEmail.setText("Welcome "+ user.getEmail());
 
@@ -40,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonLogout.setOnClickListener(this);
         buttonCreate.setOnClickListener(this);
         buttonAds.setOnClickListener(this);
+
 
     }
 
