@@ -28,7 +28,7 @@ public class AdsListFragment extends Fragment {
 
     View rootView;
 
-    public static AdsListFragment newInstance()
+    public static AdsListFragment newInstance(/*user id vagy dupla konstruktor újrafelhasználtó legyen*/)
     {
         Bundle args = new Bundle();
 
