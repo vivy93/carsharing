@@ -15,9 +15,10 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Advertisement implements Parcelable {
 
-    // private String uid;                     // owner user id
-    private List<String> acceptedUids;      // who pressed accepted
-    private String chosenUid;               // mutual
+    private String uid;                         // owner user id
+    private List<String> acceptedUids;          // who pressed accepted
+    private String chosenUid;                   // mutual
+    // DB: redundáns adattárolás az elérés gyorsasága miatt (a usernél is megvannak ezek az adatok)
 
     private TravelMode mode;
     private long when;
@@ -32,8 +33,8 @@ public class Advertisement implements Parcelable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(TravelMode mode, Date when, String from, String to, String node1, String node2, Integer seats) {
-        // this.uid = uid;
+    public Advertisement(String uid, TravelMode mode, Date when, String from, String to, String node1, String node2, Integer seats) {
+        this.uid = uid;
         this.mode = mode;
         this.when = when.getTime();
         this.from = from;
@@ -48,6 +49,7 @@ public class Advertisement implements Parcelable {
         // uid = in.readString();
         acceptedUids = in.createStringArrayList();
         chosenUid = in.readString();
+        uid = in.readString();
         mode = TravelMode.valueOf(in.readString());//TODO
         when = in.readLong();//TODO
         from = in.readString();
@@ -62,6 +64,7 @@ public class Advertisement implements Parcelable {
         // dest.writeString(uid);
         dest.writeStringList(acceptedUids);
         dest.writeString(chosenUid);
+        dest.writeString(uid);
         dest.writeString(mode.name());//TODO
         dest.writeLong(when);//TODO
         dest.writeString(from);
@@ -88,7 +91,6 @@ public class Advertisement implements Parcelable {
         }
     };
 
-    /*
     public String getUid() {
         return uid;
     }
@@ -96,7 +98,6 @@ public class Advertisement implements Parcelable {
     public void setUid(String uid) {
         this.uid = uid;
     }
-    */
 
     public List<String> getAcceptedUids() {
         return acceptedUids;

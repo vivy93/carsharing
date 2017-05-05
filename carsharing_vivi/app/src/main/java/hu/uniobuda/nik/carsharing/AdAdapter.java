@@ -38,7 +38,7 @@ public class AdAdapter extends BaseAdapter {
         }
         Advertisement ad = getItem(i);
 
-        adView.setText(ad.getFrom()+"\n-> "+ad.getTo()+"\n"+sdf.format(ad.getWhen()));
+        adView.setText("Departure: " + ad.getFrom()+", " + sdf.format(ad.getWhen()) + "\nDestination: " + ad.getTo());
 
         return adView;
     }
