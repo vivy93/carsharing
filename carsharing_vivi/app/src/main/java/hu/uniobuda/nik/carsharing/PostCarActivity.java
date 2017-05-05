@@ -48,6 +48,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private String node2;
     private Date when;
     private Integer seats;
+    private String uid;
     // END OF MOCK DATA
 
     @Override
@@ -69,6 +70,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         buttonPost.setOnClickListener(this);
 
         // MOCK DATA
+        uid = "1";
         from = "Bekescsaba Petofi utca";
         to = "Budapest Deak Ferenc ter";
         node1 = "Gyula";
@@ -103,7 +105,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
         // SAVE MOCK DATA
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Advertisement ad = new Advertisement(TravelMode.BY_CAR, when, from, to, node1, node2, seats);
+        Advertisement ad = new Advertisement(uid, TravelMode.BY_CAR, when, from, to, node1, node2, seats);
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).setValue(ad);
 
         Log.d(TAG, "saving mock data: success");
