@@ -11,20 +11,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
+import hu.uniobuda.nik.carsharing.model.SimpleParser;
 import hu.uniobuda.nik.carsharing.model.TravelMode;
 
 public class AdsListFragment extends Fragment {
@@ -62,12 +60,17 @@ public class AdsListFragment extends Fragment {
 
         }
 //praser kell!
+
+        File xmlFile = new File("https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:ChIJyc_U0TTDQUcRYBEeDCnEAAQ&destinations=place_id:ChIJgyte_ioMR0cRcBEeDCnEAAQ|place_id:ChIJ04zIKBKFQUcRsFgeDCnEAAQ&mode=walk&language=hu-HU&key=AIzaSyB5YMQI8YQ8l8cj1F6aC1rIQ3pvQjmvz0s");
+
+
+
+
         for(int i = 0; i<adList.size();i++)
         {
 
 
         }
-
 
 
         return  adList;
