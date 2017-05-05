@@ -14,7 +14,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB5YMQI8YQ8l8cj1F6aC1rIQ3pvQjmvz0s"/>
+            android:value="AIzaSyB5YMQI8YQ8l8cj1F6aC1rIQ3pvQjmvz0s"/> //Google Maps Place Autocomplete API and Distance Matrix API
 
 
         <activity android:name=".MainActivity">

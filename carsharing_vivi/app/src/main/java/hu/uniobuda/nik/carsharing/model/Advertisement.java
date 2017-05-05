@@ -22,24 +22,31 @@ public class Advertisement implements Parcelable {
     private TravelMode mode;
     private long when;
     private String from;
+    private String fromID;
     private String to;
     private String node1;
+    private String node1ID;
     private String node2;
+    private String node2ID;
     private Integer seats;
+    private Integer distance;
 
 
     public Advertisement() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(TravelMode mode, Date when, String from, String to, String node1, String node2, Integer seats) {
+    public Advertisement(TravelMode mode, Date when, String from,String fromID, String to, String node1,String node1ID, String node2,String node2ID, Integer seats) {
         // this.uid = uid;
         this.mode = mode;
         this.when = when.getTime();
         this.from = from;
+        this.fromID=fromID;
         this.to = to;
         this.node1 = node1;
+        this.node1ID=node1ID;
         this.node2 = node2;
+        this.node2ID=node2ID;
         this.seats=seats;
     }
 
@@ -51,10 +58,14 @@ public class Advertisement implements Parcelable {
         mode = TravelMode.valueOf(in.readString());//TODO
         when = in.readLong();//TODO
         from = in.readString();
+        fromID = in.readString();
         to = in.readString();
         node1 = in.readString();
+        node1ID = in.readString();
         node2 = in.readString();
+        node2ID = in.readString();
         seats = in.readInt();
+        distance = in.readInt();
     }
 
     @Override
@@ -65,10 +76,14 @@ public class Advertisement implements Parcelable {
         dest.writeString(mode.name());//TODO
         dest.writeLong(when);//TODO
         dest.writeString(from);
+        dest.writeString(fromID);
         dest.writeString(to);
         dest.writeString(node1);
+        dest.writeString(node1ID);
         dest.writeString(node2);
+        dest.writeString(node2ID);
         dest.writeInt(seats);
+        dest.writeInt(distance);
     }
 
     @Override
@@ -138,6 +153,14 @@ public class Advertisement implements Parcelable {
         this.from = from;
     }
 
+    public String getFromID() {
+        return fromID;
+    }
+
+    public void setFromID(String fromID) {
+        this.fromID = fromID;
+    }
+
     public String getTo() {
         return to;
     }
@@ -154,12 +177,28 @@ public class Advertisement implements Parcelable {
         this.node1 = node1;
     }
 
+    public String getNode1ID() {
+        return node1ID;
+    }
+
+    public void setNode1ID(String node1ID) {
+        this.node1ID = node1ID;
+    }
+
     public String getNode2() {
         return node2;
     }
 
     public void setNode2(String node2) {
         this.node2 = node2;
+    }
+
+    public String getNode2ID() {
+        return node2ID;
+    }
+
+    public void setNode2ID(String node2ID) {
+        this.node2ID = node2ID;
     }
 
     public Integer getSeats() {
@@ -169,4 +208,8 @@ public class Advertisement implements Parcelable {
     public void setSeats(Integer seats) {
         this.seats = seats;
     }
+
+    public Integer getDistance(){return distance;}
+
+    public  void  setDistance(Integer distance) {this.distance=distance;}
 }
