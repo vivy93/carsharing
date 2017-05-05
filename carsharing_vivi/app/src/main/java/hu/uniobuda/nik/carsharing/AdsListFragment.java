@@ -11,6 +11,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,9 +30,13 @@ import hu.uniobuda.nik.carsharing.model.Advertisement;
 import hu.uniobuda.nik.carsharing.model.TravelMode;
 
 public class AdsListFragment extends Fragment {
+
     private static final String TAG = "AdListFragment";
 
     View rootView;
+
+    private DatabaseReference adsReference;
+    private ChildEventListener mChildEventListener;
 
     public static AdsListFragment newInstance()
     {
@@ -46,33 +56,58 @@ public class AdsListFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
 
-        List<Advertisement> adList = new ArrayList<>();
+        List<Advertisement> adList = new ArrayList<>(); // DB-ből kell
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String dateInString = "30-04-2017 10:20:00";
-        Date date;
 
-        try {
-            date = sdf.parse(dateInString);
-            Log.d(TAG, "trying to parse date");
-            Random random = new Random();
-            /*
-            for(int i =0; i<10; i++) {
-                Log.d(TAG, "add element to advertisement list");
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Debrecen", "Budapest", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Csontváry utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.ON_FOOT, date, "Budapest, Kosztka Tivadar utca", "Jászfelsőszentgyörgy", random.nextInt(9) ));
-                adList.add(new Advertisement("1", TravelMode.BY_CAR, date, "Budaörs, Szabadság út", "Bakony", random.nextInt(9) ));
+
+
+
+        adsReference = FirebaseDatabase.getInstance().getReference().child("advertisements");
+        // vagy csak simán databaseReference kell?
+
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
             }
-            */
-            final AdAdapter adapter = new AdAdapter(adList);
-            ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
-            listView.setAdapter(adapter);
 
-            // klikk egy listaelemre: új DetailsActivity()
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        adsReference.addChildEventListener(childEventListener);
+        // Store reference to listener so it can be removed on app stop
+        mChildEventListener = childEventListener;
+
+
+
+
+
+        final AdAdapter adapter = new AdAdapter(adList);
+        ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
+        listView.setAdapter(adapter);
+
+        // klikk egy listaelemre: új DetailsActivity()
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Advertisement selectedAd = adapter.getItem(position);
@@ -82,12 +117,7 @@ public class AdsListFragment extends Fragment {
                 }
             });
 
-        } catch (ParseException e) {
-            // a catch blokk az  sdf.parse miatt kell, de ez majd úgyis eltűnik ha valós adatokkal dolgozunk a DB-ből
-            Log.d(TAG, e.getMessage());
-            e.printStackTrace();
-        }
 
-        //vege
+
     }
 }
