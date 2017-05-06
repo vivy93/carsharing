@@ -47,9 +47,12 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private FTN ftn;
 
     private EditText editTextFrom;
+    private String fromID;
     private EditText editTextTo;
     private EditText node1;
+    private String node1ID;
     private EditText node2;
+    private String node2ID;
     private EditText showDate;
     private EditText editTextFreeSeats;
     private Date travelDate;
@@ -106,6 +109,9 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         //----------------
+        fromID="";
+        node1ID="";
+        node2ID="";
         showDate = (EditText) findViewById(R.id.showDate);
         editTextFreeSeats= (EditText) findViewById(R.id.editTextFreeSeats);
 
@@ -163,13 +169,13 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
                 // Format the place's details and display them in the TextView.
                 // Which
                 switch (ftn){
-                    case From:editTextFrom.setText(place.getAddress());
+                    case From:editTextFrom.setText(place.getAddress()); fromID=place.getId();
                         break;
                     case To: editTextTo.setText(place.getAddress());
                         break;
-                    case Node1: node1.setText(place.getAddress());
+                    case Node1: node1.setText(place.getAddress()); node1ID=place.getId();
                         break;
-                    case Node2: node2.setText(place.getAddress());
+                    case Node2: node2.setText(place.getAddress()); node2ID=place.getId();
                         break;
                 }
 
@@ -211,7 +217,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this,"Wrong number format!",Toast.LENGTH_SHORT).show();
         }
 
-        Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(),null, editTextTo.getText().toString().trim(), node1.getText().toString().trim(),null, node2.getText().toString().trim(),null, seats);
+        Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(),fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(),node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
 
         Log.d(TAG, "saving real data: success");
