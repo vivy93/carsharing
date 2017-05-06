@@ -5,42 +5,57 @@ package hu.uniobuda.nik.carsharing.model;
  */
 import org.xml.sax.InputSource;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import java.io.*;
 
 public class SimpleParser {
+    String URLXML="";
+
+    public SimpleParser(String URLXML) {
+        this.URLXML = URLXML;
+    }
 
     public static void main(String[] args) throws IOException {
 
-        XPathFactory factory = XPathFactory.newInstance();
-
-        XPath xpath = factory.newXPath();
-
         try {
-            //System.out.print("Web Service Parser 1.0\n");
 
-            // In practice, you'd retrieve your XML via an HTTP request.
-            // Here we simply access an existing file.
-            File xmlFile = new File("XML_FILE");
+            File xmlFile = new File("https://maps.googleapis.com/maps/api/distancematrix/xml?origins=place_id:ChIJyc_U0TTDQUcRYBEeDCnEAAQ&destinations=place_id:ChIJgyte_ioMR0cRcBEeDCnEAAQ|place_id:ChIJ04zIKBKFQUcRsFgeDCnEAAQ&mode=walk&language=hu-HU&key=AIzaSyB5YMQI8YQ8l8cj1F6aC1rIQ3pvQjmvz0s");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(xmlFile);
 
-            // The xpath evaluator requires the XML be in the format of an InputSource
-            InputSource inputXml = new InputSource(new FileInputStream(xmlFile));
+            Element statusElement = (Element) doc.getElementsByTagName("status").item(0);
+            if(statusElement.getNodeValue().equals("OK")) {
 
-            // Because the evaluator may return multiple entries, we specify that the expression
-            // return a NODESET and place the result in a NodeList.
-            NodeList nodes = (NodeList) xpath.evaluate("XPATH_EXPRESSION", inputXml, XPathConstants.NODESET);
+            NodeList objectList = doc.getElementsByTagName("element");
+                for (int i = 0; i < objectList.getLength(); i++) {
 
-            // We can then iterate over the NodeList and extract the content via getTextContent().
-            // NOTE: this will only return text for element nodes at the returned context.
-            for (int i = 0, n = nodes.getLength(); i < n; i++) {
-                String nodeString = nodes.item(i).getTextContent();
-                System.out.print(nodeString);
-                System.out.print("\n");
+                    Node objectNode = objectList.item(i);
+
+                    if (objectNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element objectElement = (Element) objectNode;
+                        createObjectFromElement(objectElement);
+                    }
+
+                }
             }
-        } catch (XPathExpressionException ex) {
-            System.out.print("XPath Error");
-        } catch (FileNotFoundException ex) {
-            System.out.print("File Error");
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createObjectFromElement(Element objectElement) {
+        if(objectElement.getElementsByTagName("status").item(0).getAttributes().equals("OK"))
+        {
+            NamedNodeMap distanceAttributes = objectElement.getElementsByTagName("distance").item(0).getAttributes();
+            int distance = Integer.getInteger(distanceAttributes.item(0).getTextContent());
         }
     }
 }
