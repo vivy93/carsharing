@@ -77,69 +77,6 @@ public class AdsListFragment extends Fragment {
     public void SimpleParserr()
     {
 
-
-        XPath xxxx = new XPath() {
-            @Override
-            public void reset() {
-
-            }
-
-            @Override
-            public void setXPathVariableResolver(XPathVariableResolver resolver) {
-
-            }
-
-            @Override
-            public XPathVariableResolver getXPathVariableResolver() {
-                return null;
-            }
-
-            @Override
-            public void setXPathFunctionResolver(XPathFunctionResolver resolver) {
-
-            }
-
-            @Override
-            public XPathFunctionResolver getXPathFunctionResolver() {
-                return null;
-            }
-
-            @Override
-            public void setNamespaceContext(NamespaceContext nsContext) {
-
-            }
-
-            @Override
-            public NamespaceContext getNamespaceContext() {
-                return null;
-            }
-
-            @Override
-            public XPathExpression compile(String expression) throws XPathExpressionException {
-                return null;
-            }
-
-            @Override
-            public Object evaluate(String expression, Object item, QName returnType) throws XPathExpressionException {
-                return null;
-            }
-
-            @Override
-            public String evaluate(String expression, Object item) throws XPathExpressionException {
-                return null;
-            }
-
-            @Override
-            public Object evaluate(String expression, InputSource source, QName returnType) throws XPathExpressionException {
-                return null;
-            }
-
-            @Override
-            public String evaluate(String expression, InputSource source) throws XPathExpressionException {
-                return null;
-            }
-        };
-        xxx.
         try {
 
 
