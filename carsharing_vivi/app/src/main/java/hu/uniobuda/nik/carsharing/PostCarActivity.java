@@ -28,8 +28,9 @@ import java.util.Locale;
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 import hu.uniobuda.nik.carsharing.model.TravelMode;
 
-enum FTN {From, To,Node1,Node2};
-public class PostCarActivity extends AppCompatActivity implements View.OnClickListener{
+enum FTN {From, To, Node1, Node2};
+
+public class PostCarActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final String TAG = "PostCarActivity";
@@ -58,7 +59,16 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private Date travelDate;
     private Integer seats;
 
-
+    // MOCK DATA
+   /* private String from;
+    private String to;
+    private String node1;
+    private String node2;
+    private Date when;
+    private Integer seats;
+    private String uid;
+    */
+    // END OF MOCK DATA
 
 
     @Override
@@ -68,14 +78,22 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-//-----------------------------
+    //pati
+        /*
+         textView-k feltöltése az xml-ből
+         when parse-olása dátumra
+         from, to, node1, node2 szép formátumra a google maps API-val
+             ezek mellett kéne egy "check" button is sztem
+          */
+
+//IMi:-----------------------------
         // Open the autocomplete activity when the button is clicked.
         editTextFrom = (EditText) findViewById(R.id.editTextFrom);
         editTextFrom.setKeyListener(null);// ne lehessen módosítani
         editTextFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ftn=FTN.From;
+                ftn = FTN.From;
                 openAutocompleteActivity();
             }
         });
@@ -85,35 +103,37 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         editTextTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ftn=FTN.To;
+                ftn = FTN.To;
                 openAutocompleteActivity();
             }
         });
 
-        node1 =(EditText) findViewById(R.id.node1);
+        node1 = (EditText) findViewById(R.id.node1);
         node1.setKeyListener(null);
         node1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ftn=FTN.Node1;
-                openAutocompleteActivity();;
+                ftn = FTN.Node1;
+                openAutocompleteActivity();
+                ;
             }
         });
-        node2 =(EditText) findViewById(R.id.node2);
+        node2 = (EditText) findViewById(R.id.node2);
         node2.setKeyListener(null);
         node2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ftn=FTN.Node2;
-                openAutocompleteActivity();;
+                ftn = FTN.Node2;
+                openAutocompleteActivity();
+                ;
             }
         });
         //----------------
-        fromID="";
-        node1ID="";
-        node2ID="";
+        fromID = "";
+        node1ID = "";
+        node2ID = "";
         showDate = (EditText) findViewById(R.id.showDate);
-        editTextFreeSeats= (EditText) findViewById(R.id.editTextFreeSeats);
+        editTextFreeSeats = (EditText) findViewById(R.id.editTextFreeSeats);
 
         buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(this);
@@ -122,7 +142,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        if(view==buttonPost){
+        if (view == buttonPost) {
             postAd();
             //finish();
             //Log.d(TAG, "finishing " + TAG + ": success");
@@ -168,14 +188,21 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
                 // Format the place's details and display them in the TextView.
                 // Which
-                switch (ftn){
-                    case From:editTextFrom.setText(place.getAddress()); fromID=place.getId();
+                switch (ftn) {
+                    case From:
+                        editTextFrom.setText(place.getAddress());
+                        fromID = place.getId();
                         break;
-                    case To: editTextTo.setText(place.getAddress());
+                    case To:
+                        editTextTo.setText(place.getAddress());
                         break;
-                    case Node1: node1.setText(place.getAddress()); node1ID=place.getId();
+                    case Node1:
+                        node1.setText(place.getAddress());
+                        node1ID = place.getId();
                         break;
-                    case Node2: node2.setText(place.getAddress()); node2ID=place.getId();
+                    case Node2:
+                        node2.setText(place.getAddress());
+                        node2ID = place.getId();
                         break;
                 }
 
@@ -198,7 +225,14 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void postAd() {
+ /*// SAVE MOCK DATA
+          FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Advertisement ad = new Advertisement(uid, TravelMode.BY_CAR, when, from, to, node1, node2, seats);
 
+          firebaseDatabase.child("advertisements").child(currentUser.getUid()).setValue(ad);
+
+          Log.d(TAG, "saving mock data: success");
+         // END OF SAVING MOCK DATA*/
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -207,17 +241,17 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         try {
             travelDate = format.parse(dateInString);
         } catch (ParseException e) {
-            Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Wrong date format!", Toast.LENGTH_SHORT).show();
         }
 
-        String num= editTextFreeSeats.getText().toString().trim();
+        String num = editTextFreeSeats.getText().toString().trim();
         try {
-            seats=Integer.parseInt(num);
-        } catch (Exception e){
-            Toast.makeText(this,"Wrong number format!",Toast.LENGTH_SHORT).show();
+            seats = Integer.parseInt(num);
+        } catch (Exception e) {
+            Toast.makeText(this, "Wrong number format!", Toast.LENGTH_SHORT).show();
         }
 
-        Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(),fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(),node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
+        Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(), fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(), node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
 
         Log.d(TAG, "saving real data: success");

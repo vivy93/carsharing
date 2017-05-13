@@ -15,9 +15,10 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Advertisement implements Parcelable {
 
-    // private String uid;                     // owner user id
-    private List<String> acceptedUids;      // who pressed accepted
-    private String chosenUid;               // mutual
+    private String uid;                         // owner user id
+    private List<String> acceptedUids;          // who pressed accepted
+    private String chosenUid;                   // mutual
+    // DB: redundáns adattárolás az elérés gyorsasága miatt (a usernél is megvannak ezek az adatok)
 
     private TravelMode mode;
     private long when;
@@ -36,8 +37,8 @@ public class Advertisement implements Parcelable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(TravelMode mode, Date when, String from,String fromID, String to, String node1,String node1ID, String node2,String node2ID, Integer seats) {
-        // this.uid = uid;
+    public Advertisement(String uid, TravelMode mode, Date when, String from,String fromID, String to, String node1,String node1ID, String node2,String node2ID, Integer seats) {
+        this.uid = uid;
         this.mode = mode;
         this.when = when.getTime();
         this.from = from;
@@ -53,7 +54,7 @@ public class Advertisement implements Parcelable {
 
 
     protected Advertisement(Parcel in) {
-        // uid = in.readString();
+        //uid = in.readString();
         acceptedUids = in.createStringArrayList();
         chosenUid = in.readString();
         mode = TravelMode.valueOf(in.readString());//TODO
@@ -71,7 +72,7 @@ public class Advertisement implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        // dest.writeString(uid);
+        //dest.writeString(uid);
         dest.writeStringList(acceptedUids);
         dest.writeString(chosenUid);
         dest.writeString(mode.name());//TODO
@@ -104,7 +105,7 @@ public class Advertisement implements Parcelable {
         }
     };
 
-    /*
+
     public String getUid() {
         return uid;
     }
@@ -112,7 +113,6 @@ public class Advertisement implements Parcelable {
     public void setUid(String uid) {
         this.uid = uid;
     }
-    */
 
     public List<String> getAcceptedUids() {
         return acceptedUids;
