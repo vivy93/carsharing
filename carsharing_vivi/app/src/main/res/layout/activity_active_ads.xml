@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hu.uniobuda.nik.carsharing.AcceptAdsActivity">
+    tools:context="hu.uniobuda.nik.carsharing.ActiveAdsActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Acceptable Advertisement"
+        android:text="Active advertisements"
         android:textColor="#000000"
         android:textSize="25dp"
         android:gravity="center"

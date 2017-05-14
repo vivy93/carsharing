@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Acceptable Advertisements"
+            android:text="Active advertisements"
             />
 
         <FrameLayout

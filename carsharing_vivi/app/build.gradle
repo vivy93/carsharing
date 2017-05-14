@@ -1,11 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    defaultConfig {
+        multiDexEnabled true
+    }
+
     signingConfigs {
         config {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('D:/Vivi/OE_NIK/8_Felev/Mobil_Prog_1/gitmap/carsharing/carsharing_vivi/imi/debug.keystore')
+            storeFile file('C:/Android/carsharingvivi/carsharing/carsharing_vivi/imi/debug.keystore')
             storePassword 'android'
         }
     }

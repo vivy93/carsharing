@@ -27,26 +27,26 @@ import hu.uniobuda.nik.carsharing.model.Advertisement;
  * Created by Vivi on 2017. 05. 14..
  */
 
-public class AcceptAdsListFragment extends Fragment {
+public class ActiveAdsFragment extends Fragment {
 
-    private static final String TAG = "AcceptAdsListFragment";
+    private static final String TAG = "ActiveAdsFragment";
 
     View rootView;
     private ChildEventListener mChildEventListener;
     private DatabaseReference adsReference;
     private FirebaseAuth firebaseAuth;
 
-    public static AcceptAdsListFragment newInstance(/*user id vagy dupla konstruktor újrafelhasználtó legyen*/) {
+    public static ActiveAdsFragment newInstance(/*user id vagy dupla konstruktor újrafelhasználtó legyen*/) {
         Bundle args = new Bundle();
 
-        AcceptAdsListFragment fragment = new AcceptAdsListFragment();
+        ActiveAdsFragment fragment = new ActiveAdsFragment();
         fragment.setArguments(args);
         return fragment;
     }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_acceptable_ads_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_active_ads, container, false);
         return rootView;
     }
 
@@ -146,7 +146,7 @@ public class AcceptAdsListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Advertisement selectedAd = adapter.getItem(position);
-                Intent intent = new Intent(getActivity(), AcceptDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), ActiveAdsDetailsActivity.class);
                 intent.putExtra("selected_ad", selectedAd);
                 startActivity(intent);
             }

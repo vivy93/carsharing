@@ -18,16 +18,17 @@ import hu.uniobuda.nik.carsharing.model.Advertisement;
  * Created by Vivi on 2017. 05. 14..
  */
 
-public class AdAcceptableDetailsFragment extends Fragment implements View.OnClickListener{
+public class ActiveAdsDetailsFragment extends Fragment implements View.OnClickListener{
+
     View rootView;
-    private static final String TAG = "AdAcceptableDetailsFragment";
+    private static final String TAG = "ActiveAdsDetailsFragment";
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()); //igy nincs benne a GTM... az idő kiírásban
     Button acceptButton;
     Advertisement selectedAd;
 
-    public static AdAcceptableDetailsFragment newInstance(Bundle args) {
+    public static ActiveAdsDetailsFragment newInstance(Bundle args) {
 
-        AdAcceptableDetailsFragment fragment = new AdAcceptableDetailsFragment();
+        ActiveAdsDetailsFragment fragment = new ActiveAdsDetailsFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,7 +37,7 @@ public class AdAcceptableDetailsFragment extends Fragment implements View.OnClic
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_ad_acceptable_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_active_ads_details, container, false);
         return rootView;
     }
     @Override

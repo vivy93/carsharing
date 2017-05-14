@@ -32,8 +32,8 @@
         <activity android:name=".PostCarActivity" />
         <activity android:name=".PostFootActivity" />
         <activity android:name=".PostChooseActivity"/>
-        <activity android:name=".AcceptAdsActivity"/>
-        <activity android:name=".AcceptDetailsActivity"/>
+        <activity android:name=".ActiveAdsActivity"/>
+        <activity android:name=".ActiveAdsDetailsActivity"/>
 
     </application>
 
