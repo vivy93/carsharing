@@ -63,7 +63,7 @@ public class User {
         this.password = password;
     }
 
-    public void setValue(User u) {
+    /*public void setValue(User u) {
         name = u.name;
         email = u.email;
         password = u.password;
@@ -71,7 +71,7 @@ public class User {
         sex = u.sex;
         telephone = u.telephone;
         rating = u.rating;
-    }
+    }*/
 
     public String getName() {
         return name;

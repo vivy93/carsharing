@@ -71,101 +71,103 @@ public class ActiveAdsFragment extends Fragment {
         userReference = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.getUid());
         
         Log.d(TAG, "userReference is null: " + (String.valueOf(userReference == null))); // false, tehát idáig eljut
+        if(myCurrentUser != null) {
+            ValueEventListener valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    myCurrentUser.setValue(dataSnapshot.getValue(User.class));
+                    Log.d(TAG, "read user from DB: success");
+                    Log.d(TAG, "adOwnerUser is null: " + String.valueOf(myCurrentUser == null));
 
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) { 
-                myCurrentUser.setValue(dataSnapshot.getValue(User.class));
-                Log.d(TAG, "read user from DB: success");
-                Log.d(TAG, "adOwnerUser is null: " + String.valueOf(myCurrentUser == null));
-                
-            }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                Toast.makeText(getContext(), "Failed to load user.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        };
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    Toast.makeText(getContext(), "Failed to load user.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            };
 
-        userReference.addValueEventListener(valueEventListener); // calls onDataChange()
-        // GET CURRENT USER END
-
+            userReference.addValueEventListener(valueEventListener); // calls onDataChange()
+            // GET CURRENT USER END
+        }
         DatabaseReference adReference;
+        DatabaseReference tempRef=FirebaseDatabase.getInstance().getReference().child("advertisements").child(currentUser.getUid());
+        String temp = String.valueOf(tempRef == null);
         final Advertisement tempAd = new Advertisement();
-        
-        // 1. ITERÁCIÓ: A USER OWNADIDS-JA ALAPJÁN
-        for ( String adId : myCurrentUser.getOwnAdIds() ) {
+        if (tempRef == null) {
+            // 1. ITERÁCIÓ: A USER OWNADIDS-JA ALAPJÁN
+            for (String adId : myCurrentUser.getOwnAdIds()) {
 
-            adReference = FirebaseDatabase.getInstance().getReference().child("advertisements").child(adId);
+                adReference = FirebaseDatabase.getInstance().getReference().child("advertisements").child(adId);
 
-            ValueEventListener valueEventListenerAd = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    tempAd.setValue(dataSnapshot.getValue(Advertisement.class));
-                    Log.d(TAG, "read ad from DB: success");
-                    adListDB.add(tempAd);
-                    Log.d(TAG, "adding active ad to the list");
-                }
+                ValueEventListener valueEventListenerAd = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        tempAd.setValue(dataSnapshot.getValue(Advertisement.class));
+                        Log.d(TAG, "read ad from DB: success");
+                        adListDB.add(tempAd);
+                        Log.d(TAG, "adding active ad to the list");
+                    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w(TAG, "getAd:onCancelled", databaseError.toException());
-                    Toast.makeText(getContext(), "Failed to load ad.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            };
-            adReference.addValueEventListener(valueEventListenerAd);
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getAd:onCancelled", databaseError.toException());
+                        Toast.makeText(getContext(), "Failed to load ad.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                };
+                adReference.addValueEventListener(valueEventListenerAd);
 
-        }
-
-        DatabaseReference adReference2;
-        final Advertisement tempAd2 = new Advertisement();
-
-        // 2. ITERÁCIÓ: A USER ACCEPTEDADIDS-JA ALAPJÁN
-        for ( String adId : myCurrentUser.getAcceptedAdIds() ) {
-
-            adReference2 = FirebaseDatabase.getInstance().getReference().child("advertisements").child(adId);
-
-            ValueEventListener valueEventListenerAd = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    tempAd2.setValue(dataSnapshot.getValue(Advertisement.class));
-                    Log.d(TAG, "read ad from DB: success");
-                    adListDB.add(tempAd2);
-                    Log.d(TAG, "adding active ad to the list");
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w(TAG, "getAd:onCancelled", databaseError.toException());
-                    Toast.makeText(getContext(), "Failed to load ad.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            };
-            adReference2.addValueEventListener(valueEventListenerAd);
-
-        }
-
-        final List<Advertisement> adList = adListDB;// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
-
-        final AdAdapter adapter = new AdAdapter(adList);
-        ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
-        listView.setAdapter(adapter);
-
-
-        // klikk egy listaelemre: új DetailsActivity()
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Advertisement selectedAd = adapter.getItem(position);
-                Intent intent = new Intent(getActivity(), ActiveAdsDetailsActivity.class);
-                intent.putExtra("selected_ad", selectedAd);
-                startActivity(intent);
             }
-        });
 
+            DatabaseReference adReference2;
+            final Advertisement tempAd2 = new Advertisement();
+
+            // 2. ITERÁCIÓ: A USER ACCEPTEDADIDS-JA ALAPJÁN
+            for (String adId : myCurrentUser.getAcceptedAdIds()) {
+
+                adReference2 = FirebaseDatabase.getInstance().getReference().child("advertisements").child(adId);
+
+                ValueEventListener valueEventListenerAd = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        tempAd2.setValue(dataSnapshot.getValue(Advertisement.class));
+                        Log.d(TAG, "read ad from DB: success");
+                        adListDB.add(tempAd2);
+                        Log.d(TAG, "adding active ad to the list");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getAd:onCancelled", databaseError.toException());
+                        Toast.makeText(getContext(), "Failed to load ad.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                };
+                adReference2.addValueEventListener(valueEventListenerAd);
+
+            }
+
+            final List<Advertisement> adList = adListDB;// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
+
+            final AdAdapter adapter = new AdAdapter(adList);
+            ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
+            listView.setAdapter(adapter);
+
+
+            // klikk egy listaelemre: új DetailsActivity()
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Advertisement selectedAd = adapter.getItem(position);
+                    Intent intent = new Intent(getActivity(), ActiveAdsDetailsActivity.class);
+                    intent.putExtra("selected_ad", selectedAd);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     public void cleanUpListeners() {
