@@ -74,6 +74,7 @@ public class AdAdapter extends BaseAdapter {
             }
         });
 
+        this.adsList.clear();
         this.adsList = adListInt;
         notLunched = false;// mert már 1szer lefutott
     }

@@ -169,4 +169,9 @@ public class AdsListFragment extends Fragment {
         }
 
     }
+
+    public void setTravelDatas(Date travelDate, String travelFromID) {
+        this.travelDate = travelDate;
+        this.travelFromID = travelFromID;
+    }
 }
