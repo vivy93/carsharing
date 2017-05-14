@@ -65,9 +65,11 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private String node1;
     private String node2;
     private Date when;
+
     private Integer seats;
     private String uid;
     */
+
     // END OF MOCK DATA
 
 
@@ -137,6 +139,28 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
         buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(this);
+
+
+
+        /*// MOCK DATA
+        from = "Bekescsaba Petofi utca";
+        to = "Budapest Deak Ferenc ter";
+        node1 = "Gyula";
+        node2 = null;
+        seats = 2;
+
+        String dateInString = "30-04-2017 10:20:00";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
+        try {
+            when = format.parse(dateInString);
+        } catch (ParseException e) {
+            Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
+        }
+
+        Log.d(TAG, "creating mock data: success");
+        // END OF MOCK DATA*/
+
+
     }
 
 
@@ -172,6 +196,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
     }
+
 
     /**
      * Called after the autocomplete activity has finished to return its result.

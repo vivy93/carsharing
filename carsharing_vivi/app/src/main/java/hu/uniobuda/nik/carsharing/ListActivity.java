@@ -7,23 +7,23 @@ import android.os.Bundle;
 
 public class ListActivity extends AppCompatActivity {
 
-    AdsListFragment fragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        fragment = AdsListFragment.newInstance();
+        AdsListFragment fragment = AdsListFragment.newInstance();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         fragment.cleanUpListeners();
     }
+
 }

@@ -3,7 +3,9 @@ package hu.uniobuda.nik.carsharing.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.Date;
+
 import java.util.List;
+
 
 /**
  * Created by pat on 2017.03.27..

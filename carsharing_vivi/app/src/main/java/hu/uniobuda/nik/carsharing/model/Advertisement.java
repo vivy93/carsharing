@@ -15,10 +15,9 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Advertisement implements Parcelable {
 
-    private String uid;                         // owner user id
-    private List<String> acceptedUids;          // who pressed accepted
-    private String chosenUid;                   // mutual
-    // DB: redundáns adattárolás az elérés gyorsasága miatt (a usernél is megvannak ezek az adatok)
+    // private String uid;                     // owner user id
+    private List<String> acceptedUids;      // who pressed accepted
+    private String chosenUid;               // mutual
 
     private TravelMode mode;
     private long when;
@@ -37,8 +36,10 @@ public class Advertisement implements Parcelable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
+
     public Advertisement(/*String uid,*/ TravelMode mode, Date when, String from,String fromID, String to, String node1,String node1ID, String node2,String node2ID, Integer seats) {
         //this.uid = uid;
+
         this.mode = mode;
         this.when = when.getTime();
         this.from = from;
@@ -106,6 +107,8 @@ public class Advertisement implements Parcelable {
     };
 
 
+
+
     public String getUid() {
         return uid;
     }
@@ -113,6 +116,7 @@ public class Advertisement implements Parcelable {
     public void setUid(String uid) {
         this.uid = uid;
     }
+    
 
     public List<String> getAcceptedUids() {
         return acceptedUids;
