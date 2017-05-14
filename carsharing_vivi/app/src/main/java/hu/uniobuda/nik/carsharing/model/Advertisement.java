@@ -2,6 +2,7 @@ package hu.uniobuda.nik.carsharing.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -14,6 +15,8 @@ import java.util.List;
 
 @IgnoreExtraProperties
 public class Advertisement implements Parcelable {
+
+    private static final String TAG = "Advertisement Class: ";
 
     private String uid;                         // owner user id
     private List<String> acceptedUids;          // who pressed accepted
@@ -37,8 +40,8 @@ public class Advertisement implements Parcelable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Advertisement(/*String uid,*/ TravelMode mode, Date when, String from,String fromID, String to, String node1,String node1ID, String node2,String node2ID, Integer seats) {
-        //this.uid = uid;
+    public Advertisement(String uid, TravelMode mode, Date when, String from,String fromID, String to, String node1,String node1ID, String node2,String node2ID, Integer seats) {
+        this.uid = uid;
         this.mode = mode;
         this.when = when.getTime();
         this.from = from;
@@ -47,14 +50,15 @@ public class Advertisement implements Parcelable {
         this.node1 = node1;
         this.node1ID=node1ID;
         this.node2 = node2;
-        this.node2ID=node2ID;
-        this.seats=seats;
-        this.distance=0;
+        this.node2ID = node2ID;
+        this.seats = seats;
+        this.distance = 0;
+
     }
 
 
     protected Advertisement(Parcel in) {
-        //uid = in.readString();
+        uid = in.readString();
         acceptedUids = in.createStringArrayList();
         chosenUid = in.readString();
         mode = TravelMode.valueOf(in.readString());//TODO
@@ -72,7 +76,7 @@ public class Advertisement implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        //dest.writeString(uid);
+        dest.writeString(uid);
         dest.writeStringList(acceptedUids);
         dest.writeString(chosenUid);
         dest.writeString(mode.name());//TODO
@@ -85,6 +89,8 @@ public class Advertisement implements Parcelable {
         dest.writeString(node2);
         dest.writeString(node2ID);
         dest.writeInt(seats);
+
+        Log.d(TAG, distance.toString());
         dest.writeInt(distance);
     }
 

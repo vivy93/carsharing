@@ -46,6 +46,7 @@
             android:layout_alignBottom="@+id/textWhen"
             android:layout_alignParentEnd="true"
             android:hint="yyyy.MM.dd/hh-mm-ss"
+            android:text="2017.05.01/01-01-01"
             />
 
         <TextView

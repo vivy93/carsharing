@@ -23,13 +23,13 @@ public class User {
     private Integer rating;
     // private String profileImageUrl;
 
+    private List<String> acceptedAdIds;     // elfogadott hirdetések (amire acceptet nyomtam)
+    private List<String> ownAdIds;          // saját hirdetések
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
     // a profilban való kilistázáshoz kellenek ezek: (aktív hirdetések)
-    private List<String> acceptedAdIds;     // elfogadott hirdetések (amire acceptet nyomtam)
-    private List<String> ownAdIds;          // saját hirdetések
 
 
     public User(String name, String email, String password, Date birthDate, Boolean sex, String telephone) {
@@ -41,6 +41,19 @@ public class User {
         this.telephone = telephone;
         this.rating = 3;
     }
+
+    public void setValue(User u) {
+        name = u.name;
+        email = u.email;
+        password = u.password;
+        birthDate = u.birthDate;
+        sex = u.sex;
+        telephone = u.telephone;
+        rating = u.rating;
+        acceptedAdIds = u.acceptedAdIds;
+        ownAdIds = u.ownAdIds;
+    }
+
 
     // for testing
     public User(String name, String email) {
