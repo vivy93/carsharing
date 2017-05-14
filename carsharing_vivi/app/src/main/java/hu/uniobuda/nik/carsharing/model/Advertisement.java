@@ -53,7 +53,6 @@ public class Advertisement implements Parcelable {
         this.node2ID = node2ID;
         this.seats = seats;
         this.distance = 0;
-
     }
 
 

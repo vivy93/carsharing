@@ -5,12 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import java.util.Date;
-
 public class ListActivity extends AppCompatActivity {
 
-    public static Date travelDate;
-    public static String travelFromID;
     AdsListFragment fragment;
 
     @Override
@@ -19,7 +15,6 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         fragment = AdsListFragment.newInstance();
-        fragment.setTravelDatas(travelDate,travelFromID);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 

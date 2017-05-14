@@ -67,13 +67,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             /// TODO
             // előszőr ide kéne továbbjutni
-            //startActivity(new Intent(this, PostChooseActivity.class));
-            startActivity(new Intent(this, PostCarActivity.class));
+            startActivity(new Intent(this, PostChooseActivity.class));
+
+            //startActivity(new Intent(this, PostCarActivity.class));
         }
 
         if (v == buttonAds){
             finish();
-            startActivity(new Intent(this, PostFootActivity.class));
+            startActivity(new Intent(this,ListActivity.class));
         }
     }
 }
