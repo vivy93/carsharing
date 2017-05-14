@@ -16,7 +16,7 @@ public class User {
 
     private String name;
     private String email;
-    private String password;        // hash
+    private String password;
     private Date birthDate;
     private Boolean sex;            // 0: female, 1: male
     private String telephone;
@@ -29,6 +29,7 @@ public class User {
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
+
     // a profilban való kilistázáshoz kellenek ezek: (aktív hirdetések)
 
 
@@ -60,6 +61,16 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public void setValue(User u) {
+        name = u.name;
+        email = u.email;
+        password = u.password;
+        birthDate = u.birthDate;
+        sex = u.sex;
+        telephone = u.telephone;
+        rating = u.rating;
     }
 
     public String getName() {
@@ -110,12 +121,28 @@ public class User {
         this.telephone = telephone;
     }
 
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
     public Integer getRating() {
         return rating;
     }
 
-    public void setRate(Integer rating) {
-        this.rating = rating;
+    public List<String> getAcceptedAdIds() {
+        return acceptedAdIds;
+    }
+
+    public void setAcceptedAdIds(List<String> acceptedAdIds) {
+        this.acceptedAdIds = acceptedAdIds;
+    }
+
+    public List<String> getOwnAdIds() {
+        return ownAdIds;
+    }
+
+    public void setOwnAdIds(List<String> ownAdIds) {
+        this.ownAdIds = ownAdIds;
     }
 
 }

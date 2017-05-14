@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.vision.text.Text;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -65,17 +64,11 @@ public class AdDetailsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         final TextView nicNameView = (TextView) rootView.findViewById(R.id.name);
         final TextView rateView = (TextView) rootView.findViewById(R.id.rate);
-        TextView bDateView = (TextView) rootView.findViewById(R.id.bDate);
-        TextView genderView = (TextView) rootView.findViewById(R.id.gender);
-        TextView emailView = (TextView) rootView.findViewById(R.id.email);
-        TextView phoneView = (TextView) rootView.findViewById(R.id.phone);
         TextView fromView = (TextView) rootView.findViewById(R.id.from);
-        TextView node1View = (TextView) rootView.findViewById(R.id.node1);
-        TextView node2View = (TextView) rootView.findViewById(R.id.node2);
         TextView toView = (TextView) rootView.findViewById(R.id.to);
         TextView whenView = (TextView) rootView.findViewById(R.id.when);
         TextView freeSeatsView = (TextView) rootView.findViewById(R.id.freeSeats);
-        
+        //@Patrícia : azt mondtad majd még bővíted meg formázgatod az xls-t is
 
         // final kell
         final User adOwnerUser = new User();
@@ -115,19 +108,8 @@ public class AdDetailsFragment extends Fragment {
                     userReference.addValueEventListener(valueEventListener); // calls onDataChange()
 
                     // -------------
-                    nicNameView.append(String.valueOf(adOwnerUser.getName()));
-                    //Rate
-                    bDateView.append(String.valueOf(adOwnerUser.getBirthDate()));
-                    if (adOwnerUser.getSex() == null ||adOwnerUser.getSex()== true )
-                        genderView.append("male");
-                    else
-                        genderView.append("female");
 
-                    emailView.append(String.valueOf(adOwnerUser.getEmail()));
-                    phoneView.append(String.valueOf(adOwnerUser.getTelephone()));
                     fromView.append(String.valueOf(selectedAd.getFrom()));
-                    node1View.append(String.valueOf(selectedAd.getNode1()));
-                    node2View.append(String.valueOf(selectedAd.getNode2()));
                     toView.append(String.valueOf(selectedAd.getTo()));
                     whenView.append(String.valueOf(sdf.format(selectedAd.getWhen())));
                     freeSeatsView.append(String.valueOf(selectedAd.getSeats()));

@@ -56,6 +56,21 @@ public class Advertisement implements Parcelable {
 
     }
 
+    public void setValue(Advertisement a) {
+        uid = a.uid;
+        mode = a.mode;
+        when = a.when;
+        from = a.from;
+        fromID = a.fromID;
+        to = a.to;
+        node1 = a.node1;
+        node1ID = a.node1ID;
+        node2 = a.node2;
+        node2ID = a.node2ID;
+        seats = a.seats;
+        distance = a.distance;
+    }
+
 
     protected Advertisement(Parcel in) {
         uid = in.readString();
@@ -219,4 +234,6 @@ public class Advertisement implements Parcelable {
     public Integer getDistance(){return distance;}
 
     public  void  setDistance(Integer distance) {this.distance=distance;}
+
+
 }

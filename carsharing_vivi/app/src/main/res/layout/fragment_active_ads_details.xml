@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_active_ads_details"
+    android:padding="16dp"
+    >
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text=""
+        android:drawableStart="@mipmap/ic_launcher"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rate"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:text="5/"
+        android:layout_toRightOf="@+id/name"
+        android:layout_above="@+id/from" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/from"
+        android:textSize="18sp"
+        android:text="From: "
+        android:layout_below="@+id/name"
+        android:layout_alignParentStart="true"
+        android:padding="10dp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/to"
+        android:textSize="18sp"
+        android:text="To: "
+        android:layout_below="@+id/from"
+        android:padding="10dp" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/when"
+        android:textSize="18sp"
+        android:layout_below="@+id/to"
+        android:text="When: "
+        android:padding="10dp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/freeSeats"
+        android:textSize="18sp"
+        android:text="Free Seats: "
+        android:layout_below="@id/when"
+        android:padding="10dp" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/acceptButton"
+        android:text="Accept"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/rate" />
+
+
+</RelativeLayout>

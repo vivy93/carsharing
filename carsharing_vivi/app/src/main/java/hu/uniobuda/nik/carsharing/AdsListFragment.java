@@ -139,8 +139,6 @@ public class AdsListFragment extends Fragment {
         // Store reference to listener so it can be removed on app stop
         mChildEventListener = childEventListener;
 
-        //final List<Advertisement> adList = adListDB;//relevantAdsOnFoot(travelDate, travelFromID, adListDB);// adListDB;
-
         final AdAdapter adapter = new AdAdapter(adListDB);
         ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
         try {

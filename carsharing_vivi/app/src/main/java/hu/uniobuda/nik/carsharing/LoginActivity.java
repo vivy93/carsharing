@@ -67,12 +67,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (TextUtils.isEmpty(email))
         {
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter your email",Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password))
         {
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter your password",Toast.LENGTH_SHORT).show();
             return;
         }
         progressDialog.setMessage("Sign In User...");
@@ -88,12 +88,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                     startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                 }
+                else{
+                    wrongUserAndPass();
+                }
 
             }
         });
     }
 
-
+    void wrongUserAndPass()
+    {
+        Toast.makeText(this,"Username or password is incorrect!",Toast.LENGTH_SHORT).show();
+        return;
+    }
 
 
 
