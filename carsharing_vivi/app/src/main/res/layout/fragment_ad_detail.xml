@@ -29,7 +29,43 @@
         android:gravity="center_vertical"
         android:text="5/"
         android:layout_toRightOf="@+id/name"
-        android:layout_above="@+id/from" />
+        android:layout_above="@+id/bDate" />
+    <android.support.v7.widget.AppCompatTextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/bDate"
+    android:textSize="18sp"
+    android:text="BirthDate: "
+    android:padding="10dp"
+    android:layout_below="@+id/name"
+    android:layout_alignParentStart="true" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gender"
+        android:textSize="18sp"
+        android:text="Gender: "
+        android:padding="10dp"
+        android:layout_below="@+id/bDate"
+        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:textSize="18sp"
+        android:text="Email: "
+        android:padding="10dp"
+        android:layout_below="@+id/gender"
+        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone"
+        android:textSize="18sp"
+        android:text="Phone: "
+        android:padding="10dp"
+        android:layout_below="@+id/email"
+        android:layout_alignParentStart="true" />
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
@@ -37,9 +73,27 @@
         android:id="@+id/from"
         android:textSize="18sp"
         android:text="From: "
-        android:layout_below="@+id/name"
+        android:padding="10dp"
+        android:layout_below="@+id/phone"
+        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/node1"
+        android:textSize="18sp"
+        android:text="Node1: "
+        android:layout_below="@+id/from"
         android:layout_alignParentStart="true"
         android:padding="10dp"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/node2"
+        android:textSize="18sp"
+        android:text="Node2: "
+        android:padding="10dp"
+        android:layout_below="@+id/node1"
+        android:layout_alignParentStart="true" />
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
@@ -47,7 +101,7 @@
         android:id="@+id/to"
         android:textSize="18sp"
         android:text="To: "
-        android:layout_below="@+id/from"
+        android:layout_below="@+id/node2"
         android:padding="10dp" />
 
     <android.support.v7.widget.AppCompatTextView
