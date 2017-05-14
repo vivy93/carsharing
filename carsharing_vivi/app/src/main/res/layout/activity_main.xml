@@ -179,7 +179,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewSignIn"
             android:id="@+id/backdoor"
-            android:text="BackDoor" />
+            android:text="BackDoor"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
