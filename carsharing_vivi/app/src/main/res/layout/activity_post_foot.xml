@@ -65,8 +65,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonPost"
-        android:text="Post"
+        android:id="@+id/buttonSearch"
+        android:text="Search"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 

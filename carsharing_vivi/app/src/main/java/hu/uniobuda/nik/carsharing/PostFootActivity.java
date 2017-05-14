@@ -37,7 +37,7 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabase;
 
-    private Button buttonPost;
+    private Button buttonSearch;
     private EditText dateOnFoot;
     private EditText editTextFrom;
     private Date travelDate;
@@ -63,20 +63,20 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
 
         dateOnFoot= (EditText) findViewById(R.id.dateOnFoot);
 
-        buttonPost = (Button) findViewById(R.id.buttonPost);
-        buttonPost.setOnClickListener(this);
+        buttonSearch = (Button) findViewById(R.id.buttonSearch);
+        buttonSearch.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        if(v==buttonPost){
-            postAd();
+        if(v==buttonSearch){
+            //postAd();
             //finish();
 
             //Log.d(TAG, "finishing " + TAG + ": success");
 
-            startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this,ListActivity.class));
         }
     }
 
@@ -123,7 +123,7 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void postAd() {
+  /*  private void postAd() {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -139,5 +139,5 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
 
         Log.d(TAG, "creating real data: success");
-    }
+    }*/
 }
