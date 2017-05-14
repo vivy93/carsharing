@@ -37,6 +37,7 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabase;
 
+    private Boolean error;
     private Button buttonPost;
     private EditText dateOnFoot;
     private EditText editTextFrom;
@@ -46,6 +47,8 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_foot);
+
+        error = true;
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
@@ -76,7 +79,10 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
 
             //Log.d(TAG, "finishing " + TAG + ": success");
 
-            startActivity(new Intent(this, ProfileActivity.class));
+            if (error == true) {
+                finish();
+                startActivity(new Intent(this, ProfileActivity.class));
+            }
         }
     }
 
@@ -96,6 +102,8 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
                     GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
 
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            error=false;
+            return;
         }
     }
 
@@ -114,7 +122,7 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
 
                 editTextFrom.setText(place.getAddress());
 
-                }
+            }
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Log.e(TAG, "Error: Status = " + status.toString());
@@ -133,11 +141,20 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
             travelDate = format.parse(dateInString);
         } catch (ParseException e) {
             Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
+            error=false;
+            return;
+        }
+
+        if (editTextFrom.getText().toString().trim().isEmpty())
+        {
+            Toast.makeText(this,"Please enter the address!",Toast.LENGTH_SHORT).show();
+            error=false;
+            return;
         }
 
         Advertisement ad = new Advertisement(TravelMode.ON_FOOT, travelDate, editTextFrom.getText().toString().trim(), null,null,null,null, null, null, null);
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
-
+        error = true;
         Log.d(TAG, "creating real data: success");
     }
 }

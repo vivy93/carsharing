@@ -2,8 +2,7 @@ package hu.uniobuda.nik.carsharing;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +25,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 import hu.uniobuda.nik.carsharing.model.TravelMode;
@@ -60,6 +61,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private EditText editTextFreeSeats;
     private Date travelDate;
     private Integer seats;
+    private Boolean error;
 
     // MOCK DATA
    /* private String from;
@@ -78,6 +80,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_car);
 
+        error = true;
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
     //pati
@@ -140,12 +143,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(this);
     }
-    private final Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            if(msg.arg1 == 1)
-                Toast.makeText(getApplicationContext(),"Wrong date format!", Toast.LENGTH_LONG).show();
-        }
-    };
+
 
     @Override
     public void onClick(View view) {
@@ -153,7 +151,11 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
             postAd();
             //finish();
             //Log.d(TAG, "finishing " + TAG + ": success");
-            startActivity(new Intent(this, ProfileActivity.class));
+
+            if (error == true) {
+                finish();
+                startActivity(new Intent(this, ProfileActivity.class));
+            }
         }
     }
 
@@ -176,7 +178,9 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
                     GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
 
             Log.e(TAG, message);
+            error=false;
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            return;
         }
     }
 
@@ -248,22 +252,37 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         try {
             travelDate = format.parse(dateInString);
         } catch (ParseException e) {
-            //Toast.makeText(this, "Wrong date format!", Toast.LENGTH_SHORT).show();
-            Message msg = handler.obtainMessage();
-            msg.arg1 = 1;
-            handler.sendMessage(msg);
+            error=false;
+            Toast.makeText(this, "Wrong date format!", Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(this, PostCarActivity.class));
+            return;
+        }
+
+        if (editTextFrom.getText().toString().trim().isEmpty())
+        {
+            Toast.makeText(this,"Please enter your address!",Toast.LENGTH_SHORT).show();
+            error=false;
+            return;
+        }
+        if (editTextTo.getText().toString().trim().isEmpty())
+        {
+            Toast.makeText(this,"Please enter where do you want to go!",Toast.LENGTH_SHORT).show();
+            error=false;
+            return;
         }
 
         String num = editTextFreeSeats.getText().toString().trim();
         try {
             seats = Integer.parseInt(num);
         } catch (Exception e) {
+            error=false;
             Toast.makeText(this, "Wrong number format!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(), fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(), node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
         firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
-
+        error = true;
         Log.d(TAG, "saving real data: success");
     }
 }

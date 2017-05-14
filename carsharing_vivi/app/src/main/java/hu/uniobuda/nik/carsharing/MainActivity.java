@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextDate;
     private EditText editTextTelephone;
     private RadioButton editRadioMale;
+    private RadioButton editRadioFemale;
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextDate=    (EditText) findViewById(R.id.editTextDate);
         editTextTelephone=  (EditText) findViewById(R.id.editTextTelephone);
         editRadioMale = (RadioButton) findViewById(R.id.editRadioMale);
+        editRadioFemale = (RadioButton) findViewById(R.id.editRadioFemale);
 
         buttonBackDoor  =(Button) findViewById(R.id.backdoor);
 
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v==textViewSignUp)
         {
+            finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
         if(v == buttonBackDoor)
@@ -100,9 +103,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void RegisterUser() {
+        final String name = editTextName.getText().toString().trim();
+        if (name.isEmpty())
+        {
+            Toast.makeText(this,"Please enter your name!",Toast.LENGTH_SHORT).show();
+            return;
+        }
         final String email = editTextEmail.getText().toString().trim();
+        if (email.isEmpty())
+        {
+            Toast.makeText(this,"Please enter your email address!",Toast.LENGTH_SHORT).show();
+            return;
+        }
         final String password = editTextPassword.getText().toString().trim();
-
+        if (password.isEmpty())
+        {
+            Toast.makeText(this,"Please enter your password!",Toast.LENGTH_SHORT).show();
+            return;
+        }
         final String Bdate = editTextDate.getText().toString().trim();
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
         final Date birthDate;
@@ -113,19 +131,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        final String telephone = editTextTelephone.getText().toString().trim();
-        final String name = editTextName.getText().toString().trim();
         final Boolean sex = editRadioMale.isChecked(); //0 female - 1 male
-        if (TextUtils.isEmpty(email))
+
+        if (!editRadioMale.isChecked() && !editRadioFemale.isChecked())
         {
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please choose your sexuality!",Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(password))
+
+        final String telephone = editTextTelephone.getText().toString().trim();
+        if (telephone.isEmpty())
         {
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter your telephone number!",Toast.LENGTH_SHORT).show();
             return;
         }
+
+
+
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
