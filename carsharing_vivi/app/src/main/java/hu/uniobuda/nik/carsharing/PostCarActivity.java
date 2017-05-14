@@ -2,6 +2,8 @@ package hu.uniobuda.nik.carsharing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -138,7 +140,12 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(this);
     }
-
+    private final Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            if(msg.arg1 == 1)
+                Toast.makeText(getApplicationContext(),"Wrong date format!", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     public void onClick(View view) {
@@ -241,7 +248,10 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         try {
             travelDate = format.parse(dateInString);
         } catch (ParseException e) {
-            Toast.makeText(this, "Wrong date format!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Wrong date format!", Toast.LENGTH_SHORT).show();
+            Message msg = handler.obtainMessage();
+            msg.arg1 = 1;
+            handler.sendMessage(msg);
         }
 
         String num = editTextFreeSeats.getText().toString().trim();

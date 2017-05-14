@@ -88,12 +88,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                     startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                 }
+                else{
+                    wrongUserAndPass();
+                }
 
             }
         });
     }
 
-
+    void wrongUserAndPass()
+    {
+        Toast.makeText(this,"Username or password is incorrect!",Toast.LENGTH_SHORT).show();
+        return;
+    }
 
 
 

@@ -199,7 +199,7 @@ public class AdsListFragment extends Fragment {
         Date date;
         try { date = sdf.parse(dateInString); }
          catch (ParseException e) { e.printStackTrace();}*/
-        final List<Advertisement> adList = new ArrayList<>();// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
+        final List<Advertisement> adList = adListDB;// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
 
         final AdAdapter adapter = new AdAdapter(adList);
         ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
