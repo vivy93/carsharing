@@ -276,9 +276,9 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, "Wrong number format!", Toast.LENGTH_SHORT).show();
         }
 
-        Advertisement ad = new Advertisement(TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(), fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(), node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
-        firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
-
+        Advertisement ad = new Advertisement(currentUser.getUid(), TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(),
+                fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(), node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
+        firebaseDatabase.child("advertisements").push().setValue(ad);
         Log.d(TAG, "saving real data: success");
     }
 }
