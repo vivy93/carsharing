@@ -18,14 +18,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import hu.uniobuda.nik.carsharing.model.Advertisement;
 import hu.uniobuda.nik.carsharing.model.HandleJSON;
@@ -199,7 +196,7 @@ public class AdsListFragment extends Fragment {
         Date date;
         try { date = sdf.parse(dateInString); }
          catch (ParseException e) { e.printStackTrace();}*/
-        final List<Advertisement> adList = new ArrayList<>();// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
+        final List<Advertisement> adList = adListDB;// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
 
         final AdAdapter adapter = new AdAdapter(adList);
         ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
