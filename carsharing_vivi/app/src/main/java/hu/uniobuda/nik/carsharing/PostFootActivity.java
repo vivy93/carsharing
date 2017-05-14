@@ -135,8 +135,8 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
         }
 
-        Advertisement ad = new Advertisement(TravelMode.ON_FOOT, travelDate, editTextFrom.getText().toString().trim(), null,null,null,null, null, null, null);
-        firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
+        Advertisement ad = new Advertisement(currentUser.getUid(), TravelMode.ON_FOOT, travelDate, editTextFrom.getText().toString().trim(), null,null,null,null, null, null, null);
+        // firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
 
         Log.d(TAG, "creating real data: success");
     }

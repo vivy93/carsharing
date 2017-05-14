@@ -29,6 +29,7 @@ import hu.uniobuda.nik.carsharing.model.HandleJSON;
 import hu.uniobuda.nik.carsharing.model.TravelMode;
 
 public class AdsListFragment extends Fragment {
+
     private static final String TAG = "AdListFragment";
 
     //---------------------------------------------------------------------------------
@@ -66,7 +67,6 @@ public class AdsListFragment extends Fragment {
                     "|" + place_id + adList.get(i).getNode2ID() + urlEnd;
 
             adList.get(i).setDistance(jsonParser(url));
-
         }
 
         Collections.sort(adList, new Comparator<Advertisement>() {
@@ -79,7 +79,6 @@ public class AdsListFragment extends Fragment {
 
         return adList;
     }
-
     //----------------------------------------------------------------------------------
 
     View rootView;
@@ -123,8 +122,6 @@ public class AdsListFragment extends Fragment {
 
                 advertisementIds.add(dataSnapshot.getKey());
                 adListDB.add(advertisement);
-
-
             }
 
             @Override
@@ -143,7 +140,6 @@ public class AdsListFragment extends Fragment {
 
                 } else {
                     Log.w(TAG, "onChildChanged:unknown_child:" + advertisementKey);
-
                 }
             }
 
@@ -155,8 +151,6 @@ public class AdsListFragment extends Fragment {
                 // ad and if so remove it.
                 String advertisementKey = dataSnapshot.getKey();
 
-
-                // [START_EXCLUDE]
                 int advertisementIndex = advertisementIds.indexOf(advertisementKey);
                 if (advertisementIndex > 1) {
                     // Remove data from the list
@@ -190,13 +184,7 @@ public class AdsListFragment extends Fragment {
         // Store reference to listener so it can be removed on app stop
         mChildEventListener = childEventListener;
 
-        // a lista rendezéshez kell
-       /* SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String dateInString = "30-04-2017 10:20:00";
-        Date date;
-        try { date = sdf.parse(dateInString); }
-         catch (ParseException e) { e.printStackTrace();}*/
-        final List<Advertisement> adList = adListDB;// relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
+        final List<Advertisement> adList = adListDB;    // relevantAdsOnFoot(date,"ChIJDS0Ugd7cQUcRf2iJF_ktiA0",adListDB);//lurdy
 
         final AdAdapter adapter = new AdAdapter(adList);
         ListView listView = (ListView) rootView.findViewById(R.id.ads_lstview);
@@ -213,7 +201,6 @@ public class AdsListFragment extends Fragment {
             }
         });
     }
-
 
     public void cleanUpListeners() {
         if (mChildEventListener != null) {
