@@ -10,6 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,12 +84,10 @@ public class AdsListFragment extends Fragment {
 
     View rootView;
 
-
     private DatabaseReference adsReference;
     private ChildEventListener mChildEventListener;
 
     public static AdsListFragment newInstance(/*user id vagy dupla konstruktor újrafelhasználtó legyen*/) {
-
         Bundle args = new Bundle();
 
         AdsListFragment fragment = new AdsListFragment();
@@ -93,14 +98,13 @@ public class AdsListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView=inflater.inflate(R.layout.fragment_ads_list,container,false);
+        rootView = inflater.inflate(R.layout.fragment_ads_list, container, false);
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
 
         final List<Advertisement> adListDB = new ArrayList<>();       // DB-ből kell
         final List<String> advertisementIds = new ArrayList<>();    // lehet h csak a recycleviewhoz kéne?
@@ -140,10 +144,16 @@ public class AdsListFragment extends Fragment {
                 } else {
                     Log.w(TAG, "onChildChanged:unknown_child:" + advertisementKey);
 
-
                 }
-            });
+            }
 
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
+
+                // An ad has changed, use the key to determine if we are displaying this
+                // ad and if so remove it.
+                String advertisementKey = dataSnapshot.getKey();
 
 
                 // [START_EXCLUDE]
@@ -210,7 +220,6 @@ public class AdsListFragment extends Fragment {
             adsReference.removeEventListener(mChildEventListener);
 
         }
-
 
     }
 }
