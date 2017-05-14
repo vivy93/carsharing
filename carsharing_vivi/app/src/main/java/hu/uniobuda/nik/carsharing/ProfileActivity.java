@@ -1,8 +1,6 @@
 package hu.uniobuda.nik.carsharing;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +17,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button buttonLogout;
     private Button buttonCreate;
     private Button buttonAds;
+    private Button acceptableAdv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +45,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
         buttonCreate = (Button) findViewById(R.id.buttonCreate);
         buttonAds = (Button) findViewById(R.id.buttonAds);
+        acceptableAdv = (Button) findViewById(R.id.acceptableAdv);
 
         buttonLogout.setOnClickListener(this);
         buttonCreate.setOnClickListener(this);
         buttonAds.setOnClickListener(this);
+        acceptableAdv.setOnClickListener(this);
 
 
     }
@@ -75,6 +76,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (v == buttonAds){
             finish();
             startActivity(new Intent(this,ListActivity.class));
+        }
+        if (v==acceptableAdv)
+        {
+            finish();
+            startActivity(new Intent(this,AcceptAdsActivity.class));
         }
     }
 }
