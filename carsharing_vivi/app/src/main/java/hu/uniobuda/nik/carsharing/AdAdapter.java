@@ -108,12 +108,15 @@ public class AdAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         TextView adView = (TextView) view;
-        if (adView == null) {
-            adView = (TextView) View.inflate(viewGroup.getContext(), R.layout.listitem_ad, null);
+
+        if (adView == null)
+        {
+            adView= (TextView) View.inflate(viewGroup.getContext(),R.layout.listitem_ad, null);
         }
         Advertisement ad = getItem(i);
 
-        adView.setText(ad.getFrom() + "\n-> " + ad.getTo() + "\n" + sdf.format(ad.getWhen()));
+        adView.setText("DEPARTURE: " + ad.getFrom() + ", " + sdf.format(ad.getWhen()) + "\nDESTINATION: " + ad.getTo());
+
 
         return adView;
     }

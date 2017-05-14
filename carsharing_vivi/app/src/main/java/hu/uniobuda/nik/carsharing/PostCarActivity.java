@@ -59,19 +59,6 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     private Date travelDate;
     private Integer seats;
 
-    // MOCK DATA
-   /* private String from;
-    private String to;
-    private String node1;
-    private String node2;
-    private Date when;
-
-    private Integer seats;
-    private String uid;
-    */
-
-    // END OF MOCK DATA
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +67,8 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-    //pati
-        /*
-         textView-k feltöltése az xml-ből
-         when parse-olása dátumra
-         from, to, node1, node2 szép formátumra a google maps API-val
-             ezek mellett kéne egy "check" button is sztem
-          */
 
-//IMi:-----------------------------
+//IMI: -----------------------------
         // Open the autocomplete activity when the button is clicked.
         editTextFrom = (EditText) findViewById(R.id.editTextFrom);
         editTextFrom.setKeyListener(null);// ne lehessen módosítani
@@ -139,27 +119,6 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
 
         buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(this);
-
-
-
-        /*// MOCK DATA
-        from = "Bekescsaba Petofi utca";
-        to = "Budapest Deak Ferenc ter";
-        node1 = "Gyula";
-        node2 = null;
-        seats = 2;
-
-        String dateInString = "30-04-2017 10:20:00";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
-        try {
-            when = format.parse(dateInString);
-        } catch (ParseException e) {
-            Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
-        }
-
-        Log.d(TAG, "creating mock data: success");
-        // END OF MOCK DATA*/
-
 
     }
 
@@ -250,14 +209,6 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void postAd() {
- /*// SAVE MOCK DATA
-          FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Advertisement ad = new Advertisement(uid, TravelMode.BY_CAR, when, from, to, node1, node2, seats);
-
-          firebaseDatabase.child("advertisements").child(currentUser.getUid()).setValue(ad);
-
-          Log.d(TAG, "saving mock data: success");
-         // END OF SAVING MOCK DATA*/
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -279,6 +230,7 @@ public class PostCarActivity extends AppCompatActivity implements View.OnClickLi
         Advertisement ad = new Advertisement(currentUser.getUid(), TravelMode.BY_CAR, travelDate, editTextFrom.getText().toString().trim(),
                 fromID.trim(), editTextTo.getText().toString().trim(), node1.getText().toString().trim(), node1ID.trim(), node2.getText().toString().trim(), node2ID.trim(), seats);
         firebaseDatabase.child("advertisements").push().setValue(ad);
+
         Log.d(TAG, "saving real data: success");
     }
 }
