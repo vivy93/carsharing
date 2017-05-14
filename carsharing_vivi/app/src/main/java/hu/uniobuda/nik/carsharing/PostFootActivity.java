@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.PrivateKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,10 +38,12 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabase;
 
-    private Button buttonPost;
-    private EditText dateOnFoot;
+    private Button buttonSearch;
     private EditText editTextFrom;
+    private EditText dateOnFoot;
     private Date travelDate;
+    private String fromID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,23 +63,20 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
-        dateOnFoot= (EditText) findViewById(R.id.dateOnFoot);
-
-        buttonPost = (Button) findViewById(R.id.buttonPost);
-        buttonPost.setOnClickListener(this);
+        dateOnFoot = (EditText) findViewById(R.id.dateOnFoot);
+        buttonSearch = (Button) findViewById(R.id.buttonSearch);
+        buttonSearch.setOnClickListener(this);
+        fromID = "";
 
     }
 
     @Override
     public void onClick(View v) {
-        if(v==buttonPost){
-            postAd();
+        if (v == buttonSearch) {
+            SearchAd();
             //finish();
-
             //Log.d(TAG, "finishing " + TAG + ": success");
-
-            startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this, ListActivity.class));
         }
     }
 
@@ -113,31 +113,36 @@ public class PostFootActivity extends AppCompatActivity implements View.OnClickL
                 Place place = PlaceAutocomplete.getPlace(this, data);
 
                 editTextFrom.setText(place.getAddress());
+                this.fromID = String.valueOf(place.getId());
 
-                }
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                Status status = PlaceAutocomplete.getStatus(this, data);
-                Log.e(TAG, "Error: Status = " + status.toString());
-            } else if (resultCode == RESULT_CANCELED) {
             }
+        } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+            Status status = PlaceAutocomplete.getStatus(this, data);
+            Log.e(TAG, "Error: Status = " + status.toString());
+        } else if (resultCode == RESULT_CANCELED) {
+        }
     }
 
 
-    private void postAd() {
+    private void SearchAd() {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         String dateInString = dateOnFoot.getText().toString().trim();
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd/hh-mm-ss", Locale.getDefault());
         try {
-            travelDate = format.parse(dateInString);
+            this.travelDate = format.parse(dateInString);
+            ListActivity.travelDate = this.travelDate;
+            ListActivity.travelFromID = this.fromID;
         } catch (ParseException e) {
-            Toast.makeText(this,"Wrong date format!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Wrong date format!", Toast.LENGTH_SHORT).show();
         }
 
-        Advertisement ad = new Advertisement(currentUser.getUid(), TravelMode.ON_FOOT, travelDate, editTextFrom.getText().toString().trim(), null,null,null,null, null, null, null);
+
+       /* Advertisement ad = new Advertisement(currentUser.getUid(), TravelMode.ON_FOOT, travelDate, editTextFrom.getText().toString().trim(), null,null,null,null, null, null, null);
         // firebaseDatabase.child("advertisements").child(currentUser.getUid()).push().setValue(ad);
 
-        Log.d(TAG, "creating real data: success");
+        Log.d(TAG, "creating real data: success");*/
+
     }
 }

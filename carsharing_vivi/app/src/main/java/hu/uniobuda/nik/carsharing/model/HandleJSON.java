@@ -39,7 +39,7 @@ public class HandleJSON {
             for(int i=0;i<elements.length();i++) {
                 JSONObject element = elements.getJSONObject(i);
                 JSONObject Distance = element.getJSONObject("distance");
-                if(distance<Distance.getInt("value"))
+                if(distance>Distance.getInt("value"))
                     distance= Distance.getInt("value");
             }
 

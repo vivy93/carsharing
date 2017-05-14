@@ -10,7 +10,7 @@ android {
         config {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('C:/Android/carsharingvivi/carsharing/carsharing_vivi/imi/debug.keystore')
+            storeFile file('C:/GitHub/carsharing/carsharing_vivi/imi/debug.keystore')
             storePassword 'android'
         }
     }
