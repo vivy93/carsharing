@@ -19,4 +19,11 @@ public class ListActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        fragment.cleanUpListeners();
+    }
+
 }

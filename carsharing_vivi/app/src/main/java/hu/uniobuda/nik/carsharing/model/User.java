@@ -1,12 +1,11 @@
 package hu.uniobuda.nik.carsharing.model;
 
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+
+import java.util.List;
+
 
 /**
  * Created by pat on 2017.03.27..
@@ -28,6 +27,10 @@ public class User {
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
+    // a profilban való kilistázáshoz kellenek ezek: (aktív hirdetések)
+    private List<String> acceptedAdIds;     // elfogadott hirdetések (amire acceptet nyomtam)
+    private List<String> ownAdIds;          // saját hirdetések
+
 
     public User(String name, String email, String password, Date birthDate, Boolean sex, String telephone) {
         this.name = name;
@@ -101,8 +104,5 @@ public class User {
     public void setRate(Integer rating) {
         this.rating = rating;
     }
-
-
-
 
 }
